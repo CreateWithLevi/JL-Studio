@@ -26,16 +26,29 @@ const PortfolioSection = () => {
       id: "1",
       title: "Bucket Protocol",
       category: "3D model building, animation",
+      image: "/images/Portfolio_img.png",
+      rotation: 10,
     },
     {
       id: "2",
-      title: "Longreach Company Website",
-      category: "Webflow Development",
+      title: "OrbKey",
+      category: "Project design, Frontend Development",
+      image: "/images/Portfolio_img2.png",
+      rotation: -12,
     },
     {
       id: "3",
+      title: "Longreach Website",
+      category: "Webflow Development",
+      image: "/images/Portfolio_img3.png",
+      rotation: 15,
+    },
+    {
+      id: "4",
       title: "Forexify",
       category: "Full-Stack Development",
+      image: "/images/Portfolio_img4.png",
+      rotation: -8,
     },
   ];
 
@@ -76,10 +89,10 @@ const PortfolioSection = () => {
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    className="w-full aspect-video mt-6 overflow-hidden rounded-lg"
+                    className="w-[360px] h-[256px] mt-6 overflow-hidden rounded-lg"
                   >
                     <img
-                      src="/images/Portfolio_img.png"
+                      src={project.image}
                       alt={project.title}
                       className="w-full h-full object-cover"
                     />
@@ -90,17 +103,6 @@ const PortfolioSection = () => {
           ))}
         </div>
 
-        {/* View All Projects */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          className="mt-12"
-        >
-          <h3 className="text-[3.5rem] font-medium hover:text-orange-500 transition-colors cursor-pointer">
-            All of Our Work
-          </h3>
-        </motion.div>
-
         {/* Desktop Hover Preview Image */}
         <AnimatePresence>
           {!isMobile && hoveredProject && (
@@ -109,11 +111,21 @@ const PortfolioSection = () => {
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.9 }}
               transition={{ duration: 0.2 }}
-              className="fixed inset-0 pointer-events-none z-50 flex items-center justify-center"
+              className="absolute pointer-events-none z-50 left-1/2 -translate-x-1/2"
+              style={{
+                perspective: "1000px",
+                top: `${projects.findIndex((p) => p.id === hoveredProject) * 160 + 60}px`,
+              }}
             >
-              <div className="w-[800px] aspect-video">
+              <div
+                className="w-[360px] h-[256px]"
+                style={{
+                  transform: `rotate(${projects.find((p) => p.id === hoveredProject)?.rotation}deg)`,
+                  transition: "transform 0.3s ease-out",
+                }}
+              >
                 <img
-                  src="/images/Portfolio_img.png"
+                  src={projects.find((p) => p.id === hoveredProject)?.image}
                   alt="Project Preview"
                   className="w-full h-full object-cover rounded-lg"
                 />

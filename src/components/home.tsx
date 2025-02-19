@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import Navbar from "./layout/Navbar";
 import Hero from "./Hero";
 import Stats from "./sections/Stats";
+import Testimonials from "./sections/Testimonials";
 import Services from "./sections/Services";
 import PortfolioSection from "./portfolio/PortfolioSection";
 
@@ -100,6 +101,7 @@ const Home = () => {
       />
       <Services />
       <Stats />
+      <Testimonials />
 
       <Contact />
       <Footer />
