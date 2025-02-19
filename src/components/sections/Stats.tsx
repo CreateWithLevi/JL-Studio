@@ -3,7 +3,10 @@ import Spline from "@splinetool/react-spline";
 
 const Stats = () => {
   return (
-    <section className="relative py-24 bg-black text-white overflow-hidden">
+    <section
+      id="stats"
+      className="relative py-24 bg-black text-white overflow-hidden"
+    >
       {/* Spline Background */}
       <div className="absolute inset-0 z-0">
         <Spline scene="https://prod.spline.design/BsD3xGNgNz8ZsYGB/scene.splinecode" />

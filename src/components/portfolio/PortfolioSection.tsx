@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useMotionValue } from "framer-motion";
 
 interface Project {
   id: string;
@@ -10,16 +10,30 @@ interface Project {
 const PortfolioSection = () => {
   const [hoveredProject, setHoveredProject] = useState<string | null>(null);
   const [isMobile, setIsMobile] = useState(false);
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
 
   useEffect(() => {
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 768);
     };
 
+    const handleMouseMove = (e: MouseEvent) => {
+      const x = e.clientX;
+      const y = e.clientY;
+      mouseX.set(x);
+      mouseY.set(y);
+    };
+
     checkMobile();
     window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
-  }, []);
+    window.addEventListener("mousemove", handleMouseMove);
+
+    return () => {
+      window.removeEventListener("resize", checkMobile);
+      window.removeEventListener("mousemove", handleMouseMove);
+    };
+  }, [mouseX, mouseY]);
 
   const projects = [
     {
@@ -53,7 +67,7 @@ const PortfolioSection = () => {
   ];
 
   return (
-    <section className="relative py-24 bg-black text-white overflow-hidden">
+    <section id="portfolio" className="relative py-24 bg-black text-white">
       <div className="container mx-auto px-12">
         {/* Projects Header */}
         <motion.h2
@@ -111,19 +125,12 @@ const PortfolioSection = () => {
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.9 }}
               transition={{ duration: 0.2 }}
-              className="absolute pointer-events-none z-50 left-1/2 -translate-x-1/2"
+              className="fixed top-0 left-0 pointer-events-none z-[100]"
               style={{
-                perspective: "1000px",
-                top: `${projects.findIndex((p) => p.id === hoveredProject) * 160 + 60}px`,
+                transform: `translate(${mouseX.get()}px, ${mouseY.get()}px) translate(-50%, -50%) rotate(${projects.find((p) => p.id === hoveredProject)?.rotation}deg)`,
               }}
             >
-              <div
-                className="w-[360px] h-[256px]"
-                style={{
-                  transform: `rotate(${projects.find((p) => p.id === hoveredProject)?.rotation}deg)`,
-                  transition: "transform 0.3s ease-out",
-                }}
-              >
+              <div className="w-[360px] h-[256px]">
                 <img
                   src={projects.find((p) => p.id === hoveredProject)?.image}
                   alt="Project Preview"

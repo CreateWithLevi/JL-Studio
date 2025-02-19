@@ -13,27 +13,50 @@ const Navbar = ({
 }: NavbarProps) => {
   const { theme, setTheme } = useTheme();
 
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      const offset = 80; // Account for fixed navbar
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - offset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth",
+      });
+    }
+  };
+
   return (
     <nav className="fixed top-0 left-0 right-0 z-50">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Left side - Navigation links */}
           <div className="hidden md:flex items-center space-x-8">
-            <a href="#about" className="text-sm hover:text-primary">
-              About
-            </a>
-            <a href="#services" className="text-sm hover:text-primary">
-              Services
-            </a>
-            <a href="#work" className="text-sm hover:text-primary">
+            <button
+              onClick={() => scrollToSection("portfolio")}
+              className="text-sm text-white/60 hover:text-white transition-colors"
+            >
               Work
-            </a>
-            <a href="#blog" className="text-sm hover:text-primary">
-              Blog
-            </a>
-            <a href="#contact" className="text-sm hover:text-primary">
+            </button>
+            <button
+              onClick={() => scrollToSection("services")}
+              className="text-sm text-white/60 hover:text-white transition-colors"
+            >
+              Service
+            </button>
+            <button
+              onClick={() => scrollToSection("stats")}
+              className="text-sm text-white/60 hover:text-white transition-colors"
+            >
+              About
+            </button>
+            <button
+              onClick={() => scrollToSection("contact")}
+              className="text-sm text-white/60 hover:text-white transition-colors"
+            >
               Contact
-            </a>
+            </button>
           </div>
 
           {/* Center - Logo */}
@@ -55,6 +78,7 @@ const Navbar = ({
               variant="ghost"
               size="icon"
               onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+              className="text-white/60 hover:text-white"
             >
               {theme === "light" ? (
                 <Moon className="h-5 w-5" />
@@ -65,7 +89,7 @@ const Navbar = ({
             <Button
               variant="outline"
               onClick={onLanguageToggle}
-              className="px-4 py-2 text-sm"
+              className="px-4 py-2 text-sm text-white/60 hover:text-white border-white/20 hover:border-white/40"
             >
               {isEnglish ? "中文" : "ENG"}
             </Button>

@@ -11,50 +11,58 @@ interface Testimonial {
 const testimonials: Testimonial[] = [
   {
     id: 1,
-    name: "Sarah Chen",
-    avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=1",
+    name: "Reviewer name",
+    avatar:
+      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400",
     text: "JL Studio's 3D models transform abstract ideas into vivid, tangible visuals that truly impress.",
     rating: 5,
   },
   {
     id: 2,
-    name: "Michael Wang",
-    avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=2",
-    text: "Their attention to detail and creative solutions exceeded our expectations.",
+    name: "Reviewer name",
+    avatar:
+      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400",
+    text: "JL Studio's 3D models transform abstract ideas into vivid, tangible visuals that truly impress.",
     rating: 5,
   },
   {
     id: 3,
-    name: "Emily Liu",
-    avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=3",
-    text: "Working with JL Studio was a game-changer for our brand's visual identity.",
+    name: "Reviewer name",
+    avatar:
+      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400",
+    text: "JL Studio's 3D models transform abstract ideas into vivid, tangible visuals that truly impress.",
     rating: 5,
   },
   // Duplicate testimonials for infinite scroll effect
   {
     id: 4,
-    name: "Sarah Chen",
-    avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=1",
+    name: "Reviewer name",
+    avatar:
+      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400",
     text: "JL Studio's 3D models transform abstract ideas into vivid, tangible visuals that truly impress.",
     rating: 5,
   },
   {
     id: 5,
-    name: "Michael Wang",
-    avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=2",
-    text: "Their attention to detail and creative solutions exceeded our expectations.",
+    name: "Reviewer name",
+    avatar:
+      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400",
+    text: "JL Studio's 3D models transform abstract ideas into vivid, tangible visuals that truly impress.",
     rating: 5,
   },
 ];
 
 const Testimonials = () => {
   return (
-    <section className="py-24 bg-black text-white overflow-hidden">
+    <section
+      id="testimonials"
+      className="py-24 bg-black text-black overflow-hidden"
+    >
       <div className="container mx-auto px-12">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          className="text-2xl font-medium mb-12"
+          className="text-white text-2xl font-medium mb-12"
         >
           Client Reviews
         </motion.h2>
@@ -74,21 +82,23 @@ const Testimonials = () => {
               {testimonials.map((testimonial) => (
                 <div
                   key={testimonial.id}
-                  className="flex-shrink-0 w-[400px] bg-white/5 rounded-xl p-6"
+                  className="flex-shrink-0 w-[600px] bg-white rounded-[32px] p-8"
                 >
-                  <div className="flex items-center gap-4 mb-4">
+                  <div className="flex items-start gap-4 mb-4">
                     <img
                       src={testimonial.avatar}
                       alt={testimonial.name}
-                      className="w-12 h-12 rounded-full"
+                      className="w-12 h-12 rounded-full object-cover"
                     />
-                    <div>
-                      <h3 className="font-medium">{testimonial.name}</h3>
+                    <div className="space-y-2">
+                      <h3 className="font-medium text-xl">
+                        {testimonial.name}
+                      </h3>
                       <div className="flex gap-1">
                         {[...Array(testimonial.rating)].map((_, i) => (
                           <svg
                             key={i}
-                            className="w-4 h-4 text-orange-500"
+                            className="w-6 h-6 text-[#FF6B00]"
                             fill="currentColor"
                             viewBox="0 0 20 20"
                           >
@@ -98,7 +108,7 @@ const Testimonials = () => {
                       </div>
                     </div>
                   </div>
-                  <p className="text-white/80">{testimonial.text}</p>
+                  <p className="text-xl leading-relaxed">{testimonial.text}</p>
                 </div>
               ))}
             </motion.div>

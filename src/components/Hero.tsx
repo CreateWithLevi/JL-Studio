@@ -38,7 +38,7 @@ const Hero = () => {
       <motion.h1
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="text-[4.5rem] leading-tight font-medium max-w-4xl ml-48 z-10 relative"
+        className="text-[5.5rem] leading-tight font-medium max-w-5xl ml-48 z-10 relative"
       >
         We design experiences that people remember
       </motion.h1>

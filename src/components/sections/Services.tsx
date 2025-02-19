@@ -30,10 +30,10 @@ const Services = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           viewport={{ once: true }}
-          className="mb-16"
+          className="mb-16 text-center"
         >
           <h2 className="text-2xl mb-8">Our Service</h2>
-          <p className="text-6xl font-medium leading-tight max-w-5xl">
+          <p className="text-[5.5rem] font-medium leading-tight max-w-[1200px] mx-auto">
             We turn static ideas into dynamic digital spaces.
           </p>
         </motion.div>
