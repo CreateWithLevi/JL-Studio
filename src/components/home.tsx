@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import Navbar from "./layout/Navbar";
 import Hero from "./Hero";
-import About from "./sections/About";
+import Stats from "./sections/Stats";
 import Services from "./sections/Services";
 import PortfolioSection from "./portfolio/PortfolioSection";
-import Blog from "./sections/Blog";
+
 import Contact from "./sections/Contact";
 import Footer from "./sections/Footer";
 import CaseStudyModal from "./portfolio/CaseStudyModal";
@@ -94,13 +94,13 @@ const Home = () => {
         onLanguageToggle={() => setIsEnglish(!isEnglish)}
       />
       <Hero />
-      <About />
-      <Services />
       <PortfolioSection
         initialProjects={defaultProjects}
         categories={["All", "Branding", "UI/UX", "Print", "Digital", "Motion"]}
       />
-      <Blog />
+      <Services />
+      <Stats />
+
       <Contact />
       <Footer />
 

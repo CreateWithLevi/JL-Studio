@@ -11,6 +11,13 @@ interface ProjectCardProps {
   onClick?: () => void;
 }
 
+interface Project {
+  title: string;
+  description: string;
+  category: string;
+  imageUrl?: string;
+}
+
 const ProjectCard = ({
   title = "Brand Identity Design",
   category = "Branding",
