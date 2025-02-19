@@ -17,19 +17,7 @@ const Navbar = ({
     <nav className="fixed top-0 left-0 right-0 z-50">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
-          <div className="flex items-center gap-2">
-            <img
-              src={
-                theme === "light"
-                  ? "/images/JL_logo_en_b.svg"
-                  : "/images/JL_logo_en_w.svg"
-              }
-              alt="JL Studio"
-              className="h-8 w-8"
-            />
-            <span className="text-lg font-semibold">JL Studio</span>
-          </div>
-
+          {/* Left side - Navigation links */}
           <div className="hidden md:flex items-center space-x-8">
             <a href="#about" className="text-sm hover:text-primary">
               About
@@ -48,6 +36,20 @@ const Navbar = ({
             </a>
           </div>
 
+          {/* Center - Logo */}
+          <div className="flex items-center gap-2 absolute left-1/2 transform -translate-x-1/2">
+            <img
+              src={
+                theme === "light"
+                  ? "/images/JL_logo_en_b.svg"
+                  : "/images/JL_logo_en_w.svg"
+              }
+              alt="JL Studio"
+              className="h-12 w-12 mt-6"
+            />
+          </div>
+
+          {/* Right side - Theme and Language */}
           <div className="flex items-center gap-2">
             <Button
               variant="ghost"

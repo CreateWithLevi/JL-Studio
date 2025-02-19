@@ -13,7 +13,7 @@ const basename = import.meta.env.BASE_URL;
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <ThemeProvider defaultTheme="dark">
-      <BrowserRouter basename={basename}>
+      <BrowserRouter basename={basename} className="flex">
         <App />
       </BrowserRouter>
     </ThemeProvider>
