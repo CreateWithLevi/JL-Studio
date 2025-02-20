@@ -1,17 +1,60 @@
 import React, { useState, useEffect } from "react";
-import { motion, AnimatePresence, useMotionValue } from "framer-motion";
+import {
+  motion,
+  AnimatePresence,
+  useMotionValue,
+  useSpring,
+} from "framer-motion";
 
 interface Project {
   id: string;
   title: string;
   category: string;
+  image: string;
+  rotation: number;
 }
 
 const PortfolioSection = () => {
   const [hoveredProject, setHoveredProject] = useState<string | null>(null);
   const [isMobile, setIsMobile] = useState(false);
+  const [imagesPreloaded, setImagesPreloaded] = useState(false);
+
+  // Use springs for smoother cursor following
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
+  const springX = useSpring(mouseX, { damping: 25, stiffness: 300 });
+  const springY = useSpring(mouseY, { damping: 25, stiffness: 300 });
+
+  const projects = [
+    {
+      id: "1",
+      title: "Bucket Protocol",
+      category: "3D model building, animation",
+      image: "/images/Portfolio_img.png",
+      rotation: 5,
+    },
+    {
+      id: "2",
+      title: "OrbKey",
+      category: "Project design, Frontend Development",
+      image: "/images/Portfolio_img2.png",
+      rotation: -5,
+    },
+    {
+      id: "3",
+      title: "Longreach Website",
+      category: "Webflow Development",
+      image: "/images/Portfolio_img3.png",
+      rotation: 5,
+    },
+    {
+      id: "4",
+      title: "Forexify",
+      category: "Full-Stack Development",
+      image: "/images/Portfolio_img4.png",
+      rotation: -5,
+    },
+  ];
 
   useEffect(() => {
     const checkMobile = () => {
@@ -19,12 +62,30 @@ const PortfolioSection = () => {
     };
 
     const handleMouseMove = (e: MouseEvent) => {
-      const x = e.clientX;
-      const y = e.clientY;
-      mouseX.set(x);
-      mouseY.set(y);
+      mouseX.set(e.clientX);
+      mouseY.set(e.clientY);
     };
 
+    // Preload images
+    const preloadImages = async () => {
+      const imagePromises = projects.map((project) => {
+        return new Promise((resolve, reject) => {
+          const img = new Image();
+          img.onload = resolve;
+          img.onerror = reject;
+          img.src = project.image;
+        });
+      });
+
+      try {
+        await Promise.all(imagePromises);
+        setImagesPreloaded(true);
+      } catch (error) {
+        console.error("Error preloading images:", error);
+      }
+    };
+
+    preloadImages();
     checkMobile();
     window.addEventListener("resize", checkMobile);
     window.addEventListener("mousemove", handleMouseMove);
@@ -33,53 +94,13 @@ const PortfolioSection = () => {
       window.removeEventListener("resize", checkMobile);
       window.removeEventListener("mousemove", handleMouseMove);
     };
-  }, [mouseX, mouseY]);
-
-  const projects = [
-    {
-      id: "1",
-      title: "Bucket Protocol",
-      category: "3D model building, animation",
-      image: "/images/Portfolio_img.png",
-      rotation: 10,
-    },
-    {
-      id: "2",
-      title: "OrbKey",
-      category: "Project design, Frontend Development",
-      image: "/images/Portfolio_img2.png",
-      rotation: -12,
-    },
-    {
-      id: "3",
-      title: "Longreach Website",
-      category: "Webflow Development",
-      image: "/images/Portfolio_img3.png",
-      rotation: 15,
-    },
-    {
-      id: "4",
-      title: "Forexify",
-      category: "Full-Stack Development",
-      image: "/images/Portfolio_img4.png",
-      rotation: -8,
-    },
-  ];
+  }, []);
 
   return (
     <section id="portfolio" className="relative py-24 bg-black text-white">
       <div className="container mx-auto px-12">
-        {/* Projects Header */}
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          className="text-2xl font-medium mb-12"
-        >
-          Projects
-        </motion.h2>
-
         {/* Projects List */}
-        <div className="space-y-12">
+        <div className="space-y-24">
           {projects.map((project) => (
             <motion.div
               key={project.id}
@@ -90,8 +111,8 @@ const PortfolioSection = () => {
               onMouseLeave={() => !isMobile && setHoveredProject(null)}
             >
               <div className="group cursor-pointer">
-                <div className="flex justify-between items-center mb-4">
-                  <h3 className="text-[3.5rem] font-medium group-hover:text-orange-500 transition-colors">
+                <div className="flex justify-between items-center">
+                  <h3 className="text-[5rem] font-medium group-hover:text-orange-500 transition-colors">
                     {project.title}
                   </h3>
                   <span className="text-sm text-white/60">
@@ -118,25 +139,42 @@ const PortfolioSection = () => {
         </div>
 
         {/* Desktop Hover Preview Image */}
-        <AnimatePresence>
-          {!isMobile && hoveredProject && (
+        <AnimatePresence mode="wait">
+          {!isMobile && hoveredProject && imagesPreloaded && (
             <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.9 }}
-              transition={{ duration: 0.2 }}
-              className="fixed top-0 left-0 pointer-events-none z-[100]"
+              key={hoveredProject}
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{
+                opacity: 1,
+                scale: 1,
+                rotate:
+                  projects.find((p) => p.id === hoveredProject)?.rotation || 0,
+              }}
+              exit={{ opacity: 0, scale: 0.8 }}
+              transition={{
+                duration: 0.2,
+                rotate: { type: "spring", stiffness: 200, damping: 30 },
+              }}
+              className="fixed pointer-events-none z-[100] origin-center"
               style={{
-                transform: `translate(${mouseX.get()}px, ${mouseY.get()}px) translate(-50%, -50%) rotate(${projects.find((p) => p.id === hoveredProject)?.rotation}deg)`,
+                top: springY,
+                left: springX,
+                transform: `translate(-50%, -50%)`,
               }}
             >
-              <div className="w-[360px] h-[256px]">
-                <img
+              <motion.div
+                className="w-[480px] h-[340px] overflow-hidden rounded-lg"
+                layoutId={`project-image-${hoveredProject}`}
+              >
+                <motion.img
                   src={projects.find((p) => p.id === hoveredProject)?.image}
                   alt="Project Preview"
-                  className="w-full h-full object-cover rounded-lg"
+                  className="w-full h-full object-cover"
+                  initial={{ scale: 1.2 }}
+                  animate={{ scale: 1 }}
+                  transition={{ duration: 0.4 }}
                 />
-              </div>
+              </motion.div>
             </motion.div>
           )}
         </AnimatePresence>
