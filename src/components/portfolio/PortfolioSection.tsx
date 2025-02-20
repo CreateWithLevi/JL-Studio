@@ -99,20 +99,21 @@ const PortfolioSection = () => {
   return (
     <section id="portfolio" className="relative py-24 bg-black text-white">
       <div className="container mx-auto px-12">
+        <h2 className="text-2xl mb-4">Projects</h2>
         {/* Projects List */}
-        <div className="space-y-24">
+        <div className="space-y-10">
           {projects.map((project) => (
             <motion.div
               key={project.id}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              className="relative border-b border-white/10 pb-12"
+              className="relative border-t border-white/10 pt-8"
               onMouseEnter={() => !isMobile && setHoveredProject(project.id)}
               onMouseLeave={() => !isMobile && setHoveredProject(null)}
             >
               <div className="group cursor-pointer">
                 <div className="flex justify-between items-center">
-                  <h3 className="text-[5rem] font-medium group-hover:text-orange-500 transition-colors">
+                  <h3 className="text-[4rem] font-medium group-hover:text-orange-500 transition-colors">
                     {project.title}
                   </h3>
                   <span className="text-sm text-white/60">
