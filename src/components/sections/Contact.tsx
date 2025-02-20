@@ -8,31 +8,30 @@ const Contact = () => {
     >
       <div className="container mx-auto px-12">
         <div className="flex flex-col items-center text-center">
-          {/* Available dot */}
-          <div className="flex items-center gap-2 mb-6">
-            <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-            <span className="text-sm text-white/60">Available</span>
-          </div>
-
-          {/* Let's talk */}
+          {/* Heading */}
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
-            className="text-[8rem] font-medium mb-8"
+            className="text-[12rem] font-medium mb-12"
           >
+            {/* Available Status */}
+            <div className="flex items-center gap-2 ml-5">
+              <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+              <span className="text-sm text-white/60">Available</span>
+            </div>
             Let's talk
           </motion.h2>
 
-          {/* Email */}
+          {/* Email Button */}
           <motion.a
             href="mailto:jlstudio.xyz@gmail.com"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
+            transition={{ duration: 0.5 }}
             viewport={{ once: true }}
-            className="text-orange-500 text-xl hover:text-orange-400 transition-colors"
+            className="bg-[#F97315] text-white text-xl px-16 py-6 rounded-full hover:bg-orange-600 transition-colors mb-32"
           >
             jlstudio.xyz@gmail.com
           </motion.a>
@@ -41,13 +40,40 @@ const Contact = () => {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
             viewport={{ once: true }}
-            className="mt-24 text-[4rem] font-medium flex items-center gap-8"
+            className="text-[5rem] font-medium flex items-center gap-8"
           >
-            <span>Services,</span>
-            <span>Projects,</span>
-            <span>Contact</span>
+            <button
+              onClick={() =>
+                document
+                  .getElementById("portfolio")
+                  ?.scrollIntoView({ behavior: "smooth" })
+              }
+              className="hover:text-[#F97315] transition-colors"
+            >
+              Work,
+            </button>
+            <button
+              onClick={() =>
+                document
+                  .getElementById("services")
+                  ?.scrollIntoView({ behavior: "smooth" })
+              }
+              className="hover:text-[#F97315] transition-colors"
+            >
+              Service,
+            </button>
+            <button
+              onClick={() =>
+                document
+                  .getElementById("stats")
+                  ?.scrollIntoView({ behavior: "smooth" })
+              }
+              className="hover:text-[#F97315] transition-colors"
+            >
+              About
+            </button>
           </motion.div>
         </div>
       </div>

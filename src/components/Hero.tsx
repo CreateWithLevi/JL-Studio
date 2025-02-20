@@ -42,12 +42,6 @@ const Hero = () => {
       >
         We design experiences that people remember
       </motion.h1>
-
-      {/* About us dot */}
-      <div className="absolute bottom-12 right-12 flex items-center gap-2">
-        <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-        <span className="text-sm text-white/60">About us</span>
-      </div>
     </div>
   );
 };
