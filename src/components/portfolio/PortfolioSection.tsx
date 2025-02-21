@@ -5,6 +5,7 @@ import {
   useMotionValue,
   useSpring,
 } from "framer-motion";
+import { ScrambleWord } from "../ui/scramble-word";
 
 interface Project {
   id: string;
@@ -101,26 +102,30 @@ const PortfolioSection = () => {
       <div className="container mx-auto px-12">
         <h2 className="text-2xl mb-4">Projects</h2>
         {/* Projects List */}
-        <div className="space-y-10">
+        <div className="space-y-0">
           {projects.map((project) => (
             <motion.div
               key={project.id}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              className="relative border-t border-white/10 pt-8"
+              className="relative border-t border-white/10 pt-8 pb-10"
               onMouseEnter={() => !isMobile && setHoveredProject(project.id)}
               onMouseLeave={() => !isMobile && setHoveredProject(null)}
             >
               <div className="group cursor-pointer">
                 <div className="flex justify-between items-center">
                   <h3 className="text-4xl font-medium group-hover:text-orange-500 transition-colors sm:text-4xl md:text-5xl lg:text-[4rem]">
-                    {project.title}
+                    <ScrambleWord
+                      text={project.title}
+                      trigger={hoveredProject === project.id}
+                      duration={500}
+                      interval={100}
+                    />
                   </h3>
                   <span className="text-sm text-white/60">
                     {project.category}
                   </span>
                 </div>
-                {/* Mobile Image */}
                 {isMobile && (
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
@@ -144,7 +149,7 @@ const PortfolioSection = () => {
           {!isMobile && hoveredProject && imagesPreloaded && (
             <motion.div
               key={hoveredProject}
-              initial={{ opacity: 0, scale: 0.8, translateX: '-50%', translateY: '-50%' }}
+              initial={{ opacity: 0, scale: 0.8 }}
               animate={{
                 opacity: 1,
                 scale: 1,
@@ -153,7 +158,7 @@ const PortfolioSection = () => {
               }}
               exit={{ opacity: 0, scale: 0.8 }}
               transition={{
-                duration: 0.2,
+                duration: 0.15,
                 rotate: { type: "spring", stiffness: 200, damping: 30 },
               }}
               className="fixed pointer-events-none z-[100] origin-center"
@@ -172,7 +177,7 @@ const PortfolioSection = () => {
                   className="w-full h-full object-cover"
                   initial={{ scale: 1.2 }}
                   animate={{ scale: 1 }}
-                  transition={{ duration: 0.4 }}
+                  transition={{ duration: 0.3 }}
                 />
               </motion.div>
             </motion.div>

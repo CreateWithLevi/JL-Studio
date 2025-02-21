@@ -113,6 +113,10 @@ const Testimonials = () => {
               ))}
             </motion.div>
           </div>
+          {/* Left black gradient */}
+          <div className="absolute inset-y-0 left-0 w-6 bg-gradient-to-r from-black to-transparent pointer-events-none"></div>
+          {/* Right black gradient */}
+          <div className="absolute inset-y-0 right-0 w-6 bg-gradient-to-l from-black to-transparent pointer-events-none"></div>
         </div>
       </div>
     </section>

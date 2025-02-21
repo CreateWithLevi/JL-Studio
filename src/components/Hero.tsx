@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import Spline from "@splinetool/react-spline";
+import { ScrambleWord } from "./ui/scramble-word";
 
 const Hero = () => {
   return (
@@ -10,39 +11,40 @@ const Hero = () => {
         <Spline scene="https://prod.spline.design/xWiH2fmwVpivHIY1/scene.splinecode" />
       </div>
 
-      {/* Center - Main Heading */}
+      {/* Center - Main Heading with Scramble Effect on hover for each word */}
       <div className="container mx-auto px-12 z-10">
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-6xl leading-tight font-medium sm:text-8xl md:text-9xl lg:text-[9rem]"
+          className="max-w-[1000px] text-6xl leading-tight font-medium sm:text-8xl md:text-9xl lg:text-[9rem]"
         >
-          We design{" "}
-          <span className="relative inline-block">
-            experiences
+          <ScrambleWord text="We" className="mr-2 inline-block pr-4" />
+          <ScrambleWord text="design" className="mr-2 inline-block" />
+          <span className="relative inline-block mr-2">
+            <ScrambleWord text="experiences" />
             <motion.img
               src="/images/spinning_obj2.svg"
               alt="Spinning Object 2"
-              className="absolute w-12 h-12"
+              className="absolute w-16 h-16"
               style={{ top: "8px", right: "-24px" }}
               animate={{ rotate: 360 }}
               transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
             />
-          </span>{" "}
+          </span>
           <br />
-          that{" "}
-          <span className="relative inline-block">
-            people
+          <ScrambleWord text="that" className="mr-2 inline-block pr-4" />
+          <span className="relative inline-block mr-2">
+            <ScrambleWord text="people" />
             <motion.img
               src="/images/spinning_obj1.svg"
               alt="Spinning Object 1"
-              className="absolute w-12 h-12"
+              className="absolute w-16 h-16"
               style={{ bottom: "-16px", left: "-32px" }}
               animate={{ rotate: 360 }}
               transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
             />
-          </span>{" "}
-          remember
+          </span>
+          <ScrambleWord text="remember" className="ml-2 inline-block" />
         </motion.h1>
 
         {/* Services List */}
