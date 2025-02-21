@@ -25,7 +25,7 @@ const Contact = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
-            className="text-7xl font-medium mb-12 sm:text-8xl md:text-10xl lg:text-[12rem]"
+            className="text-7xl font-medium mb-20 sm:text-8xl md:text-10xl lg:text-[12rem]"
             onMouseEnter={() => setHoveredElement('lets-talk')}
             onMouseLeave={() => setHoveredElement(null)}
           >
@@ -44,7 +44,7 @@ const Contact = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
-            className="bg-[#F97315] text-white text-xl px-16 py-6 rounded-full hover:bg-orange-600 transition-colors mb-32"
+            className="bg-[#F97315] text-white text-xl px-16 py-6 rounded-full hover:bg-orange-600 transition-colors mb-28"
           >
             jlstudio.xyz@gmail.com
           </motion.a>
@@ -55,7 +55,7 @@ const Contact = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
             viewport={{ once: true }}
-            className="text-4xl font-medium flex items-center gap-8 sm:text-4xl md:text-5xl lg:text-[5rem]"
+            className="text-4xl font-medium flex items-center gap-8 mb-32 sm:text-4xl md:text-5xl lg:text-[5rem]"
           >
             <button
               onClick={() => document.getElementById("portfolio")?.scrollIntoView({ behavior: "smooth" })}
