@@ -14,10 +14,10 @@ const Contact = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
-            className="text-[12rem] font-medium mb-12"
+            className="text-7xl font-medium mb-12 sm:text-8xl md:text-10xl lg:text-[12rem]"
           >
             {/* Available Status */}
-            <div className="flex items-center gap-2 ml-5">
+            <div className="flex items-center gap-2 ml-1 md:ml-2 lg:ml-5">
               <div className="w-3 h-3 bg-green-500 rounded-full"></div>
               <span className="text-sm text-white/60">Available</span>
             </div>
@@ -42,7 +42,7 @@ const Contact = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
             viewport={{ once: true }}
-            className="text-[5rem] font-medium flex items-center gap-8"
+            className="text-4xl font-medium flex items-center gap-8  sm:text-4xl md:text-5xl lg:text-[5rem]"
           >
             <button
               onClick={() =>

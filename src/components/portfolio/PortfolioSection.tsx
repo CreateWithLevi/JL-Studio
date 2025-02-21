@@ -113,7 +113,7 @@ const PortfolioSection = () => {
             >
               <div className="group cursor-pointer">
                 <div className="flex justify-between items-center">
-                  <h3 className="text-[4rem] font-medium group-hover:text-orange-500 transition-colors">
+                  <h3 className="text-4xl font-medium group-hover:text-orange-500 transition-colors sm:text-4xl md:text-5xl lg:text-[4rem]">
                     {project.title}
                   </h3>
                   <span className="text-sm text-white/60">
@@ -144,7 +144,7 @@ const PortfolioSection = () => {
           {!isMobile && hoveredProject && imagesPreloaded && (
             <motion.div
               key={hoveredProject}
-              initial={{ opacity: 0, scale: 0.8 }}
+              initial={{ opacity: 0, scale: 0.8, translateX: '-50%', translateY: '-50%' }}
               animate={{
                 opacity: 1,
                 scale: 1,
@@ -160,7 +160,6 @@ const PortfolioSection = () => {
               style={{
                 top: springY,
                 left: springX,
-                transform: `translate(-50%, -50%)`,
               }}
             >
               <motion.div

@@ -15,7 +15,7 @@ const Hero = () => {
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-[5.5rem] leading-tight font-medium"
+          className="text-6xl leading-tight font-medium sm:text-8xl md:text-9xl lg:text-[9rem]"
         >
           We design{" "}
           <span className="relative inline-block">
@@ -46,7 +46,7 @@ const Hero = () => {
         </motion.h1>
 
         {/* Services List */}
-        <div className="flex gap-4 mt-8">
+        <div className="flex flex-wrap gap-4 mt-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
