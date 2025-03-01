@@ -9,7 +9,7 @@ interface NavbarProps {
 
 const Navbar = ({
   isEnglish = true,
-  onLanguageToggle = () => {},
+  onLanguageToggle = () => { },
 }: NavbarProps) => {
   const { theme, setTheme } = useTheme();
 
@@ -30,7 +30,7 @@ const Navbar = ({
   return (
     <nav className="fixed top-0 left-0 right-0 z-50">
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex items-center justify-end md:justify-between h-16">
           {/* Left side - Navigation links */}
           <div className="hidden md:flex items-center space-x-8">
             <button
@@ -51,12 +51,6 @@ const Navbar = ({
             >
               About
             </button>
-            <button
-              onClick={() => scrollToSection("contact")}
-              className="text-sm text-white/60 hover:text-white transition-colors"
-            >
-              Contact
-            </button>
           </div>
 
           {/* Center - Logo */}
@@ -74,25 +68,12 @@ const Navbar = ({
 
           {/* Right side - Theme and Language */}
           <div className="flex items-center gap-2">
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-              className="text-white/60 hover:text-white"
+            <button
+              onClick={() => scrollToSection("contact")}
+              className="text-sm border border-[#F97315] text-white px-3 py-1 rounded-full hover:bg-orange-600 transition-colors"
             >
-              {theme === "light" ? (
-                <Moon className="h-5 w-5" />
-              ) : (
-                <Sun className="h-5 w-5" />
-              )}
-            </Button>
-            <Button
-              variant="outline"
-              onClick={onLanguageToggle}
-              className="px-4 py-2 text-sm text-white/60 hover:text-white border-white/20 hover:border-white/40"
-            >
-              {isEnglish ? "中文" : "ENG"}
-            </Button>
+              Contact
+            </button>
           </div>
         </div>
       </div>

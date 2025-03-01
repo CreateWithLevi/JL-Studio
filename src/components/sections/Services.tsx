@@ -15,7 +15,7 @@ const services = [
   },
   {
     number: "03",
-    title: "Production",
+    title: "Web Development",
     description:
       "We transform your space with captivating installations, custom expo stands, and meticulously crafted signs and props—bringing your brand's vision to life.",
   },
@@ -70,7 +70,7 @@ const Services = () => {
                 <p className="text-white/80 leading-relaxed">
                   {service.description}
                 </p>
-                <div className="flex">
+                <div className="flex hidden mt-6">
                   <a
                     href="#"
                     className="ml-auto inline-flex items-center gap-2 mt-6 text-sm text-white hover:text-orange-400"

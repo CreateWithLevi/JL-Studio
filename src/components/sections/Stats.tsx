@@ -24,8 +24,7 @@ const Stats = () => {
             >
               <h3 className="text-[10rem] font-medium leading-none">6+</h3>
               <p className="text-white/80 text-lg max-w-[300px] leading-tight">
-                years system: Apparel X is a cloud platform, re-developed with a
-                local apparel founder.
+                years collaborating with a local founder to co-develop the cloud-based “Apparel X” platform, ensuring scalable and cost-effective operations.
               </p>
             </motion.div>
           </div>
@@ -37,10 +36,9 @@ const Stats = () => {
               viewport={{ once: true }}
               className="space-y-4"
             >
-              <h3 className="text-[10rem] font-medium leading-none">40</h3>
+              <h3 className="text-[10rem] font-medium leading-none">40%</h3>
               <p className="text-white/80 text-lg max-w-[300px] leading-tight">
-                A custom temple lantern system with improved reordering and
-                payment integration, boosted online sales by 40%!
+                boost in online sales through a custom, templated lantern system featuring streamlined ordering and payment integration.
               </p>
             </motion.div>
           </div>
@@ -54,7 +52,7 @@ const Stats = () => {
             >
               <h3 className="text-[10rem] font-medium leading-none">6+</h3>
               <p className="text-white/80 text-lg max-w-[300px] leading-tight">
-                years 3D model building experience and also as an instructor.
+                years of 3D modeling and teaching experience, mentoring aspiring designers in advanced digital creation techniques.
               </p>
             </motion.div>
           </div>
@@ -68,7 +66,7 @@ const Stats = () => {
             >
               <h3 className="text-[10rem] font-medium leading-none">10</h3>
               <p className="text-white/80 text-lg max-w-[300px] leading-tight">
-                years website design & development
+                years of expertise in website design and development, creating user-friendly platforms that amplify brand visibility and customer engagement.
               </p>
             </motion.div>
           </div>

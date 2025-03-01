@@ -55,7 +55,7 @@ const Contact = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
             viewport={{ once: true }}
-            className="text-4xl font-medium flex items-center gap-8 mb-32 sm:text-4xl md:text-5xl lg:text-[5rem]"
+            className="text-[2rem] font-medium flex items-center gap-2 md:gap-8 mb-32 sm:text-4xl md:text-5xl lg:text-[5rem]"
           >
             <button
               onClick={() => document.getElementById("portfolio")?.scrollIntoView({ behavior: "smooth" })}

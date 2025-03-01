@@ -56,7 +56,7 @@ const Testimonials = () => {
   return (
     <section
       id="testimonials"
-      className="py-24 bg-black text-black overflow-hidden"
+      className="py-24 bg-black text-black overflow-hidden hidden"
     >
       <div className="container mx-auto px-12">
         <motion.h2
@@ -68,7 +68,7 @@ const Testimonials = () => {
         </motion.h2>
 
         <div className="relative">
-          <div className="flex gap-6 overflow-hidden">
+          <div className="flex gap-6 overflow-hidden -mr-32 -ml-32 md:mr-0 md:ml-0">
             <motion.div
               className="flex gap-6"
               initial={{ x: 0 }}
@@ -144,9 +144,9 @@ const Testimonials = () => {
             </motion.div>
           </div>
           {/* Left black gradient */}
-          <div className="absolute inset-y-0 left-0 w-6 bg-gradient-to-r from-black to-transparent pointer-events-none"></div>
+          <div className="absolute inset-y-0 left-0 w-6 bg-gradient-to-r from-black to-transparent pointer-events-none hidden md:block"></div>
           {/* Right black gradient */}
-          <div className="absolute inset-y-0 right-0 w-6 bg-gradient-to-l from-black to-transparent pointer-events-none"></div>
+          <div className="absolute inset-y-0 right-0 w-6 bg-gradient-to-l from-black to-transparent pointer-events-none hidden md:block"></div>
         </div>
       </div>
     </section>

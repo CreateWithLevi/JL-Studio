@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import { X } from "lucide-react";
 
 interface CaseStudyModalProps {
@@ -17,39 +18,24 @@ interface CaseStudyModalProps {
     solution?: string;
     results?: string;
     images?: string[];
+    techStack?: string[];
   };
 }
 
 const CaseStudyModal = ({
-  isOpen = true,
-  onClose = () => {},
-  project = {
-    title: "Modern Brand Identity",
-    category: "Branding",
-    imageUrl:
-      "https://images.unsplash.com/photo-1634986666676-ec8fd927c23d?w=800",
-    description:
-      "A comprehensive brand identity project for a modern tech company.",
-    challenge:
-      "Create a distinctive and versatile brand identity that reflects the company's innovative approach while maintaining simplicity and recognition.",
-    solution:
-      "Developed a minimalist geometric logo system with a dynamic color palette that adapts across different platforms and mediums.",
-    results:
-      "The new brand identity increased brand recognition by 40% and successfully unified the company's visual communication across all channels.",
-    images: [
-      "https://images.unsplash.com/photo-1634986666676-ec8fd927c23d?w=800",
-      "https://images.unsplash.com/photo-1551650975-87deedd944c3?w=800",
-      "https://images.unsplash.com/photo-1547949003-9792a18a2601?w=800",
-    ],
-  },
+  isOpen = false,
+  onClose = () => { },
+  project,
 }: CaseStudyModalProps) => {
+  if (!project) return null;
+
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-4xl p-0 bg-white">
+      <DialogContent className="max-w-5xl p-0 bg-white rounded-8xl overflow-hidden">
         <Button
           variant="ghost"
           size="icon"
-          className="absolute right-4 top-4 z-10"
+          className="absolute right-4 top-4 z-10 text-white hover:bg-white/20"
           onClick={onClose}
         >
           <X className="h-4 w-4" />
@@ -60,58 +46,96 @@ const CaseStudyModal = ({
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              className="w-full h-[400px] relative"
+              className="w-full h-[500px] relative"
             >
               <img
                 src={project.imageUrl}
                 alt={project.title}
                 className="w-full h-full object-cover"
               />
-              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-6">
-                <h2 className="text-3xl font-bold text-white mb-2">
-                  {project.title}
-                </h2>
-                <span className="inline-block px-3 py-1 text-sm bg-white/20 rounded-full text-white">
-                  {project.category}
-                </span>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+              <div className="absolute bottom-0 left-0 right-0 p-8">
+                <motion.div
+                  initial={{ y: 20, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 0.2 }}
+                >
+                  <h2 className="text-4xl font-bold text-white mb-4">{project.title}</h2>
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    {project.techStack?.map((tech, index) => (
+                      <Badge
+                        key={index}
+                        variant="secondary"
+                        className="bg-white/10 text-white hover:bg-white/20"
+                      >
+                        {tech}
+                      </Badge>
+                    ))}
+                  </div>
+                  <span className="text-lg text-white/80">{project.category}</span>
+                </motion.div>
               </div>
             </motion.div>
 
-            <div className="p-6 space-y-8">
+            <div className="p-8 space-y-12 bg-white">
               <section>
-                <h3 className="text-xl font-semibold mb-3">Overview</h3>
-                <p className="text-gray-600">{project.description}</p>
+                <motion.div
+                  initial={{ y: 20, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 0.3 }}
+                  className="max-w-3xl"
+                >
+                  <h3 className="text-2xl font-semibold mb-4 text-gray-600">THE GOAL</h3>
+                  <p className="text-gray-600 text-lg leading-relaxed">{project.description}</p>
+                </motion.div>
               </section>
 
-              <section>
-                <h3 className="text-xl font-semibold mb-3">Challenge</h3>
-                <p className="text-gray-600">{project.challenge}</p>
+              <section className="grid md:grid-cols-3 gap-8">
+                <motion.div
+                  initial={{ y: 20, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 0.4 }}
+                  className="space-y-4"
+                >
+                  <h3 className="text-xl font-semibold text-gray-600">THE GAP</h3>
+                  <p className="text-gray-600">{project.challenge}</p>
+                </motion.div>
+
+                <motion.div
+                  initial={{ y: 20, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 0.5 }}
+                  className="space-y-4"
+                >
+                  <h3 className="text-xl font-semibold text-gray-600">THE GAMBLE</h3>
+                  <p className="text-gray-600">{project.solution}</p>
+                </motion.div>
+
+                <motion.div
+                  initial={{ y: 20, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 0.6 }}
+                  className="space-y-4"
+                >
+                  <h3 className="text-xl font-semibold text-gray-600">THE GAIN</h3>
+                  <p className="text-gray-600">{project.results}</p>
+                </motion.div>
               </section>
 
-              <section>
-                <h3 className="text-xl font-semibold mb-3">Solution</h3>
-                <p className="text-gray-600">{project.solution}</p>
-              </section>
-
-              <section>
-                <h3 className="text-xl font-semibold mb-3">Results</h3>
-                <p className="text-gray-600">{project.results}</p>
-              </section>
-
-              <section className="space-y-4">
-                <h3 className="text-xl font-semibold">Project Gallery</h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <section className="space-y-6 hidden">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {project.images?.map((image, index) => (
                     <motion.div
                       key={index}
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: index * 0.1 }}
+                      transition={{ delay: 0.3 + index * 0.1 }}
+                      className="relative group overflow-hidden rounded-lg"
                     >
                       <img
                         src={image}
-                        alt={`Project image ${index + 1}`}
-                        className="w-full h-48 object-cover rounded-lg"
+                        alt={`${project.title} - Image ${index + 1}`}
+                        className="w-full aspect-video object-cover transition-transform duration-300 group-hover:scale-105"
                       />
                     </motion.div>
                   ))}
