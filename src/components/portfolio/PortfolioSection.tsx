@@ -154,8 +154,18 @@ const PortfolioSection: React.FC<PortfolioSectionProps> = ({
     }
   }, [activeCategory, initialProjects]);
 
+  const handleMouseLeave = () => {
+    if (!isMobile) {
+      setHoveredProject(null);
+    }
+  };
+
   return (
-    <section id="portfolio" className="relative py-24 bg-black text-white">
+    <section
+      id="portfolio"
+      className="relative py-24 bg-black text-white"
+      onMouseLeave={handleMouseLeave}
+    >
       <div className="container mx-auto px-6 lg:px-12">
         <div className="mb-12">
           <h2 className="text-3xl mb-8">Projects</h2>
@@ -184,7 +194,7 @@ const PortfolioSection: React.FC<PortfolioSectionProps> = ({
               whileInView={{ opacity: 1, y: 0 }}
               className="relative border-t border-white/10 pt-8 pb-10"
               onMouseEnter={() => !isMobile && setHoveredProject(project.id)}
-              onMouseLeave={() => !isMobile && setHoveredProject(null)}
+              onMouseLeave={handleMouseLeave}
               onClick={() => onProjectSelect(project)}
             >
               <div className="group cursor-pointer">

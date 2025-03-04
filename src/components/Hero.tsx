@@ -7,12 +7,15 @@ const Hero = () => {
   return (
     <div className="relative w-full min-h-screen bg-black text-white flex flex-col justify-center">
       {/* Spline Background */}
-      <div className="absolute inset-0 z-0">
-        <Spline scene="https://prod.spline.design/xWiH2fmwVpivHIY1/scene.splinecode" />
+      <div className="absolute inset-0 z-0 pointer-events-auto">
+        <Spline
+          scene="https://prod.spline.design/xWiH2fmwVpivHIY1/scene.splinecode"
+          className="w-full h-full"
+        />
       </div>
 
       {/* Center - Main Heading with Scramble Effect on hover for each word */}
-      <div className="container mx-auto px-12 z-10">
+      <div className="container mx-auto px-12 z-10 pointer-events-none">
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}

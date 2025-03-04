@@ -65,7 +65,7 @@ export const ScrambleWord = ({
 
     return (
         <span
-            className={className}
+            className={`pointer-events-auto ${className}`}
             onMouseEnter={handleMouseEnter}
             style={{ cursor: 'default' }}
         >
