@@ -1,6 +1,7 @@
 import { useTheme } from "../ThemeProvider";
 import { Button } from "../ui/button";
 import { Moon, Sun } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 interface NavbarProps {
   isEnglish?: boolean;
@@ -12,6 +13,7 @@ const Navbar = ({
   onLanguageToggle = () => { },
 }: NavbarProps) => {
   const { theme, setTheme } = useTheme();
+  const navigate = useNavigate();
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
@@ -55,15 +57,20 @@ const Navbar = ({
 
           {/* Center - Logo */}
           <div className="flex items-center gap-2 absolute left-1/2 transform -translate-x-1/2">
-            <img
-              src={
-                theme === "light"
-                  ? "/images/JL_logo_en_b.svg"
-                  : "/images/JL_logo_en_w.svg"
-              }
-              alt="JL Studio"
-              className="h-12 w-12 mt-6"
-            />
+            <button
+              onClick={() => navigate("/")}
+              className="transition-transform duration-200 hover:scale-110"
+            >
+              <img
+                src={
+                  theme === "light"
+                    ? "/images/JL_logo_en_b.svg"
+                    : "/images/JL_logo_en_w.svg"
+                }
+                alt="JL Studio"
+                className="h-12 w-12 mt-6"
+              />
+            </button>
           </div>
 
           {/* Right side - Theme and Language */}
