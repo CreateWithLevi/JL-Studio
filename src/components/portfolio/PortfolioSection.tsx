@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback, useMemo } from "react";
-import { motion, AnimatePresence, useMotionValue, useSpring } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { ScrambleWord } from "../ui/scramble-word";
+import clsx from "clsx";
 
 interface Project {
   id: string;
@@ -89,6 +90,84 @@ const defaultProjects: Project[] = [
   }
 ];
 
+// Direction detection function
+const getDirection = (ev: React.MouseEvent<HTMLDivElement, MouseEvent>, obj: HTMLElement) => {
+  const { width: w, height: h, left, top } = obj.getBoundingClientRect();
+
+  const centerX = left + w / 2;
+  const centerY = top + h / 2;
+
+  const xOffset = ev.clientX - centerX;
+  const yOffset = ev.clientY - centerY;
+
+  const angleDegrees = Math.atan2(yOffset, xOffset) * (180 / Math.PI);
+  const adjustedAngle = angleDegrees < 0 ? angleDegrees + 360 : angleDegrees;
+
+  if (adjustedAngle >= 315 || adjustedAngle < 45) {
+    return "right";
+  } else if (adjustedAngle >= 45 && adjustedAngle < 135) {
+    return "bottom";
+  } else if (adjustedAngle >= 135 && adjustedAngle < 225) {
+    return "left";
+  } else {
+    return "top";
+  }
+};
+
+// Image animation variants
+const imageVariants = {
+  initial: {
+    x: 0,
+    y: 0,
+    scale: 0.9,
+    opacity: 0,
+  },
+  top: {
+    y: 25,
+    scale: 1,
+    opacity: 1,
+    transition: {
+      type: "spring",
+      stiffness: 300,
+      damping: 30,
+      duration: 0.6,
+    },
+  },
+  bottom: {
+    y: -25,
+    scale: 1,
+    opacity: 1,
+    transition: {
+      type: "spring",
+      stiffness: 300,
+      damping: 30,
+      duration: 0.6,
+    },
+  },
+  left: {
+    x: 25,
+    scale: 1,
+    opacity: 1,
+    transition: {
+      type: "spring",
+      stiffness: 300,
+      damping: 30,
+      duration: 0.6,
+    },
+  },
+  right: {
+    x: -25,
+    scale: 1,
+    opacity: 1,
+    transition: {
+      type: "spring",
+      stiffness: 300,
+      damping: 30,
+      duration: 0.6,
+    },
+  },
+};
+
 const PortfolioSection: React.FC<PortfolioSectionProps> = ({
   initialProjects = defaultProjects,
   categories = ["All", "Creative Direction", "3D & Motion", "Web Design", "Web Development"],
@@ -99,45 +178,69 @@ const PortfolioSection: React.FC<PortfolioSectionProps> = ({
   const [imagesPreloaded, setImagesPreloaded] = useState(false);
   const [activeCategory, setActiveCategory] = useState("All");
   const [projects, setProjects] = useState(initialProjects);
+  const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
+  const [direction, setDirection] = useState<"top" | "bottom" | "left" | "right" | string>("initial");
 
-  // Optimized springs for ultra-smooth cursor following
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-  const springX = useSpring(mouseX, { 
-    damping: 30, 
-    stiffness: 400, 
-    mass: 0.5,
-    restDelta: 0.001
-  });
-  const springY = useSpring(mouseY, { 
-    damping: 30, 
-    stiffness: 400, 
-    mass: 0.5,
-    restDelta: 0.001
-  });
+  // Optimized cursor tracking - Keep image near center with slight movement
+  const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    // Only move image when hovering over a project
+    if (!hoveredProject) return;
+    
+    const projectElement = e.currentTarget;
+    if (!projectElement) return;
 
-  // Debounced mouse move handler for better performance
-  const handleMouseMove = useCallback((e: MouseEvent) => {
-    requestAnimationFrame(() => {
-      mouseX.set(e.clientX);
-      mouseY.set(e.clientY);
-    });
-  }, [mouseX, mouseY]);
+    // Get project area boundaries (where the mouse is moving)
+    const projectRect = projectElement.getBoundingClientRect();
+    
+    // Calculate mouse position relative to the project area
+    const mouseRelativeX = (e.clientX - projectRect.left) / projectRect.width; // 0 to 1
+    const mouseRelativeY = (e.clientY - projectRect.top) / projectRect.height; // 0 to 1
+    
+    // Get viewport dimensions for image positioning
+    const viewportWidth = window.innerWidth;
+    
+    // Calculate base position - Y follows project position, X slightly more left
+    const baseX = viewportWidth * 0.62; // Moved left from 0.75 to 0.68
+    const baseY = projectRect.top + projectRect.height / 2; // Center of current project
+    
+    // Convert relative mouse position to image offset
+    // When mouse is at left of project (0), image moves left (-offset)
+    // When mouse is at right of project (1), image moves right (+offset)
+    const maxOffsetX = 80;
+    const maxOffsetY = 60;
+    
+    const offsetX = (mouseRelativeX - 0.5) * 2 * maxOffsetX; // -80 to +80
+    const offsetY = (mouseRelativeY - 0.5) * 2 * maxOffsetY; // -60 to +60
+    
+    // Calculate final position
+    const targetX = baseX + offsetX;
+    const targetY = baseY + offsetY;
+    
+    const smoothFactor = 0.12;
 
-  // Optimized hover handlers with immediate state updates
-  const handleMouseEnter = useCallback((projectId: string) => {
-    if (!isMobile) {
-      setHoveredProject(projectId);
+    setCursorPosition((prev) => ({
+      x: prev.x + (targetX - prev.x) * smoothFactor,
+      y: prev.y + (targetY - prev.y) * smoothFactor,
+    }));
+  }, [hoveredProject]);
+
+  // Direction-aware mouse enter - Fixed to work for all projects
+  const handleMouseEnter = useCallback((event: React.MouseEvent<HTMLDivElement, MouseEvent>, projectId: string) => {
+    if (isMobile) return;
+    if (event.currentTarget) {
+      setDirection(getDirection(event, event.currentTarget));
     }
+    setHoveredProject(projectId);
   }, [isMobile]);
 
   const handleMouseLeave = useCallback(() => {
     if (!isMobile) {
       setHoveredProject(null);
+      setDirection("initial");
     }
   }, [isMobile]);
 
-  // Memoized current project to prevent unnecessary renders
+  // Memoized current project
   const currentHoveredProject = useMemo(() => 
     projects.find((p) => p.id === hoveredProject), 
     [projects, hoveredProject]
@@ -170,13 +273,11 @@ const PortfolioSection: React.FC<PortfolioSectionProps> = ({
     preloadImages();
     checkMobile();
     window.addEventListener("resize", checkMobile);
-    window.addEventListener("mousemove", handleMouseMove, { passive: true });
 
     return () => {
       window.removeEventListener("resize", checkMobile);
-      window.removeEventListener("mousemove", handleMouseMove);
     };
-  }, [projects, handleMouseMove]);
+  }, [projects]);
 
   useEffect(() => {
     if (activeCategory === "All") {
@@ -186,13 +287,18 @@ const PortfolioSection: React.FC<PortfolioSectionProps> = ({
     }
   }, [activeCategory, initialProjects]);
 
+  // Calculate direction-based offset
+  const translateTopInverse = direction === "top" ? -25 : 0;
+  const translateBottomInverse = direction === "bottom" ? 25 : 0;
+  const translateLeftInverse = direction === "left" ? -25 : 0;
+  const translateRightInverse = direction === "right" ? 25 : 0;
+
   return (
     <section
       id="portfolio"
       className="relative py-24 bg-black text-white"
-      onMouseLeave={handleMouseLeave}
     >
-      <div className="container mx-auto px-6 lg:px-12">
+      <div className="container mx-auto px-6 lg:px-12" onMouseMove={handleMouseMove}>
         <div className="mb-12">
           <h2 className="text-3xl mb-8">Projects</h2>
           <div className="flex flex-wrap gap-y-4 gap-x-2 md:gap-x-4">
@@ -211,28 +317,43 @@ const PortfolioSection: React.FC<PortfolioSectionProps> = ({
           </div>
         </div>
 
-        <div className="space-y-0">
-          {projects.map((project) => (
+        <motion.div
+          initial="initial"
+          whileHover={direction}
+        >
+          {projects.map((project, index) => (
             <motion.div
               key={project.id}
               layout
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              className="relative border-t border-white/10 pt-8 pb-10"
-              onMouseEnter={() => handleMouseEnter(project.id)}
+              className={clsx(
+                "relative border-t border-white/10 pt-8 pb-10 cursor-pointer transition-colors duration-300",
+                {
+                  "lg:text-white/20": hoveredProject !== project.id && hoveredProject !== null,
+                  "lg:text-white": hoveredProject === project.id || hoveredProject === null,
+                }
+              )}
+              onMouseEnter={(e) => handleMouseEnter(e, project.id)}
+              onMouseMove={handleMouseMove}
               onMouseLeave={handleMouseLeave}
               onClick={() => onProjectSelect(project)}
             >
-              <div className="group cursor-pointer">
+              <div className="group">
                 <div className="flex justify-between items-center">
-                  <h3 className="text-4xl font-medium group-hover:text-orange-500 transition-colors duration-300 ease-out sm:text-4xl md:text-5xl lg:text-[4rem]">
-                    <ScrambleWord
-                      text={project.title}
-                      trigger={hoveredProject === project.id}
-                      duration={500}
-                      interval={100}
-                    />
-                  </h3>
+                  <div className="flex items-center">
+                    <p className="mr-6 md:mr-8 text-xl font-bold md:text-2xl text-white/40">
+                      {String(index + 1).padStart(2, '0')}
+                    </p>
+                    <h3 className="text-4xl font-medium group-hover:text-orange-500 transition-colors duration-300 ease-out sm:text-4xl md:text-5xl lg:text-[4rem]">
+                      <ScrambleWord
+                        text={project.title}
+                        trigger={hoveredProject === project.id}
+                        duration={500}
+                        interval={100}
+                      />
+                    </h3>
+                  </div>
                   <span className={`text-sm text-white/60 transition-opacity duration-200 ${isMobile ? 'hidden' : ''}`}>
                     {project.category}
                   </span>
@@ -254,65 +375,25 @@ const PortfolioSection: React.FC<PortfolioSectionProps> = ({
               </div>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
 
-        {/* Desktop Hover Preview Image - Optimized */}
+        {/* Desktop Hover Preview Image - Fixed positioning */}
         <AnimatePresence mode="wait">
           {!isMobile && hoveredProject && imagesPreloaded && currentHoveredProject && (
             <motion.div
               key={hoveredProject}
-              initial={{ 
-                opacity: 0, 
-                scale: 0.9, 
-                x: "-50%", 
-                y: "-50%",
-                rotate: currentHoveredProject.rotation || 0
-              }}
-              animate={{
-                opacity: 1,
-                scale: 1,
-                x: "-50%",
-                y: "-50%",
-                rotate: currentHoveredProject.rotation || 0,
-              }}
-              exit={{ 
-                opacity: 0, 
-                scale: 0.9, 
-                x: "-50%", 
-                y: "-50%",
-                transition: { duration: 0.2, ease: "easeInOut" }
-              }}
-              transition={{
-                type: "spring",
-                stiffness: 300,
-                damping: 35,
-                mass: 0.8,
-                opacity: { duration: 0.25, ease: "easeOut" },
-                scale: { duration: 0.25, ease: "easeOut" }
-              }}
-              className="fixed pointer-events-none z-[100] origin-center will-change-transform"
+              className="pointer-events-none fixed inset-0 z-[100] hidden lg:block"
               style={{
-                top: springY,
-                left: springX,
+                translateX: cursorPosition.x - 270 + translateLeftInverse + translateRightInverse,
+                translateY: cursorPosition.y - 192 + translateTopInverse + translateBottomInverse,
               }}
             >
-              <motion.div 
-                className="w-[480px] h-[340px] overflow-hidden rounded-lg shadow-2xl"
-                initial={{ rotateY: 10 }}
-                animate={{ rotateY: 0 }}
-                transition={{ duration: 0.3, ease: "easeOut" }}
-              >
+              <motion.div className="w-[540px] h-[384px] overflow-hidden shadow-2xl">
                 <motion.img
-                  src={currentHoveredProject.imageUrl}
-                  alt="Project Preview"
                   className="w-full h-full object-cover"
-                  initial={{ scale: 1.1, opacity: 0.8 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  transition={{ 
-                    duration: 0.4, 
-                    ease: "easeOut",
-                    scale: { type: "spring", stiffness: 200, damping: 25 }
-                  }}
+                  variants={imageVariants}
+                  src={currentHoveredProject.imageUrl}
+                  alt={currentHoveredProject.title}
                 />
               </motion.div>
             </motion.div>
