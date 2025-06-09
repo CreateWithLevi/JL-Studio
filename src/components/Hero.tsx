@@ -1,17 +1,39 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import Spline from "@splinetool/react-spline";
 import { ScrambleWord } from "./ui/scramble-word";
 
 const Hero = () => {
+  const [shouldLoadSpline, setShouldLoadSpline] = useState(false);
+  const heroRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          setShouldLoadSpline(true);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (heroRef.current) {
+      observer.observe(heroRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <div className="relative w-full min-h-screen bg-black text-white flex flex-col justify-center">
-      {/* Spline Background */}
+    <div ref={heroRef} className="relative w-full min-h-screen bg-black text-white flex flex-col justify-center">
+      {/* Spline Background - Lazy loaded */}
       <div className="absolute inset-0 z-0 pointer-events-auto">
-        <Spline
-          scene="https://prod.spline.design/xWiH2fmwVpivHIY1/scene.splinecode"
-          className="w-full h-full"
-        />
+        {shouldLoadSpline && (
+          <Spline
+            scene="https://prod.spline.design/0G-53mF0OLb9dkfQ/scene.splinecode"
+            className="w-full h-full"
+          />
+        )}
       </div>
 
       {/* Center - Main Heading with Scramble Effect on hover for each word */}

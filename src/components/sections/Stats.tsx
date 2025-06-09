@@ -1,15 +1,39 @@
 import { motion } from "framer-motion";
 import Spline from "@splinetool/react-spline";
+import React, { useState, useRef, useEffect } from "react";
 
 const Stats = () => {
+  const [shouldLoadSpline, setShouldLoadSpline] = useState(false);
+  const statsRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          setShouldLoadSpline(true);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (statsRef.current) {
+      observer.observe(statsRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <section
+      ref={statsRef}
       id="stats"
       className="relative py-24 bg-black text-white overflow-hidden"
     >
-      {/* Spline Background */}
+      {/* Spline Background - Lazy loaded */}
       <div className="md:absolute inset-0 z-0 md:m-0 h-[400px] sm:h-[450px]  md:h-auto -mt-40 md:-mt-0">
-        <Spline scene="https://prod.spline.design/BsD3xGNgNz8ZsYGB/scene.splinecode" />
+        {shouldLoadSpline && (
+          <Spline scene="https://prod.spline.design/BsD3xGNgNz8ZsYGB/scene.splinecode" />
+        )}
       </div>
 
       <div className="container mx-auto px-12 relative z-10">
@@ -24,7 +48,7 @@ const Stats = () => {
             >
               <h3 className="text-[3rem] sm:text-[8rem] md:text-[9rem] lg:text-[10rem] font-medium leading-none">6+</h3>
               <p className="text-white/80 text-lg max-w-[300px] leading-tight">
-                years collaborating with a local founder to co-develop the cloud-based “Apparel X” platform, ensuring scalable and cost-effective operations.
+                years collaborating with a local founder to co-develop the cloud-based "Apparel X" platform, ensuring scalable and cost-effective operations.
               </p>
             </motion.div>
           </div>

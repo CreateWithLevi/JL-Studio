@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback, useMemo } from "react";
 import { motion, AnimatePresence, useMotionValue, useSpring } from "framer-motion";
 import { ScrambleWord } from "../ui/scramble-word";
 
@@ -29,7 +29,7 @@ const defaultProjects: Project[] = [
     category: "Creative Direction, 3D & Motion, Web Design, Web Development",
     imageUrl: "/images/Portfolio_img-2.png",
     description: "Conventional keyboards have seen little change despite technological advancements. OrbKey reimagines typing with a spherical design that enhances comfort, saves space, and introduces a futuristic aesthetic, all while incorporating cutting-edge connectivity and ergonomics.",
-    challenge: "Our challenge was to create a compelling digital presence for OrbKey that would effectively communicate its revolutionary design and functionality. The goal was to design an interactive and visually striking website that showcases the spherical keyboard’s uniqueness, engages potential users, and builds anticipation for a potential product launch.",
+    challenge: "Our challenge was to create a compelling digital presence for OrbKey that would effectively communicate its revolutionary design and functionality. The goal was to design an interactive and visually striking website that showcases the spherical keyboard's uniqueness, engages potential users, and builds anticipation for a potential product launch.",
     solution: "We developed a sleek, modern website featuring an interactive 3D model and an immersive typing animation with sound effects. The minimalist design and dynamic color options enhanced user engagement and showcased the futuristic aesthetic of OrbKey.",
     results: "Although the website was not launched publicly due to OrbKey being a conceptual project, it successfully demonstrated the potential of a spherical keyboard. The interactive experience showcased its futuristic design, sparking discussions and inspiring new ideas in keyboard innovation.",
     images: [
@@ -44,10 +44,10 @@ const defaultProjects: Project[] = [
     title: "Bucket Protocol",
     category: "Creative Direction, 3D & Motion",
     imageUrl: "/images/Portfolio_img-1.png",
-    description: "Our project aimed to design a high-quality 3D loading animation for the Bucket Protocol website to enhance user engagement during transactions. The goal was to create an animation that aligns with the brand’s identity and strengthens Bucket Protocol’s market presence by improving user experience and brand perception.",
+    description: "Our project aimed to design a high-quality 3D loading animation for the Bucket Protocol website to enhance user engagement during transactions. The goal was to create an animation that aligns with the brand's identity and strengthens Bucket Protocol's market presence by improving user experience and brand perception.",
     challenge: "Our goal was to craft a high-quality animation that reduces waiting anxiety, reinforces brand identity, and enhances user engagement while maintaining a clear, sophisticated, and immersive experience.",
-    solution: "We created an immersive animation with fluid currency movements and a glowing cup-like logo, reflecting Bucket Protocol’s high-tech aesthetic. Diamond-reflective coins and smooth transitions enhanced realism, making transactions visually engaging and intuitive.",
-    results: "The animation enhanced the transaction experience with a seamless, high-tech visual, boosting user engagement and reinforcing trust in Bucket Protocol’s innovation. By transforming waiting time into an engaging experience, the animation added both aesthetic and functional value to the protocol.",
+    solution: "We created an immersive animation with fluid currency movements and a glowing cup-like logo, reflecting Bucket Protocol's high-tech aesthetic. Diamond-reflective coins and smooth transitions enhanced realism, making transactions visually engaging and intuitive.",
+    results: "The animation enhanced the transaction experience with a seamless, high-tech visual, boosting user engagement and reinforcing trust in Bucket Protocol's innovation. By transforming waiting time into an engaging experience, the animation added both aesthetic and functional value to the protocol.",
     images: [
       "/images/Portfolio_img-1.png",
       "/images/Portfolio_img-2.png"
@@ -100,20 +100,52 @@ const PortfolioSection: React.FC<PortfolioSectionProps> = ({
   const [activeCategory, setActiveCategory] = useState("All");
   const [projects, setProjects] = useState(initialProjects);
 
-  // Use springs for smoother cursor following
+  // Optimized springs for ultra-smooth cursor following
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
-  const springX = useSpring(mouseX, { damping: 25, stiffness: 300 });
-  const springY = useSpring(mouseY, { damping: 25, stiffness: 300 });
+  const springX = useSpring(mouseX, { 
+    damping: 30, 
+    stiffness: 400, 
+    mass: 0.5,
+    restDelta: 0.001
+  });
+  const springY = useSpring(mouseY, { 
+    damping: 30, 
+    stiffness: 400, 
+    mass: 0.5,
+    restDelta: 0.001
+  });
+
+  // Debounced mouse move handler for better performance
+  const handleMouseMove = useCallback((e: MouseEvent) => {
+    requestAnimationFrame(() => {
+      mouseX.set(e.clientX);
+      mouseY.set(e.clientY);
+    });
+  }, [mouseX, mouseY]);
+
+  // Optimized hover handlers with immediate state updates
+  const handleMouseEnter = useCallback((projectId: string) => {
+    if (!isMobile) {
+      setHoveredProject(projectId);
+    }
+  }, [isMobile]);
+
+  const handleMouseLeave = useCallback(() => {
+    if (!isMobile) {
+      setHoveredProject(null);
+    }
+  }, [isMobile]);
+
+  // Memoized current project to prevent unnecessary renders
+  const currentHoveredProject = useMemo(() => 
+    projects.find((p) => p.id === hoveredProject), 
+    [projects, hoveredProject]
+  );
 
   useEffect(() => {
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 768);
-    };
-
-    const handleMouseMove = (e: MouseEvent) => {
-      mouseX.set(e.clientX);
-      mouseY.set(e.clientY);
     };
 
     // Preload images
@@ -138,13 +170,13 @@ const PortfolioSection: React.FC<PortfolioSectionProps> = ({
     preloadImages();
     checkMobile();
     window.addEventListener("resize", checkMobile);
-    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("mousemove", handleMouseMove, { passive: true });
 
     return () => {
       window.removeEventListener("resize", checkMobile);
       window.removeEventListener("mousemove", handleMouseMove);
     };
-  }, [projects]);
+  }, [projects, handleMouseMove]);
 
   useEffect(() => {
     if (activeCategory === "All") {
@@ -153,12 +185,6 @@ const PortfolioSection: React.FC<PortfolioSectionProps> = ({
       setProjects(initialProjects.filter(project => project.category.includes(activeCategory)));
     }
   }, [activeCategory, initialProjects]);
-
-  const handleMouseLeave = () => {
-    if (!isMobile) {
-      setHoveredProject(null);
-    }
-  };
 
   return (
     <section
@@ -174,7 +200,7 @@ const PortfolioSection: React.FC<PortfolioSectionProps> = ({
               <button
                 key={category}
                 onClick={() => setActiveCategory(category)}
-                className={`px-4 py-2 rounded-full transition-colors ${activeCategory === category
+                className={`px-4 py-2 rounded-full transition-colors duration-200 ${activeCategory === category
                   ? "bg-white text-black"
                   : "bg-white/10 hover:bg-white/20"
                   }`}
@@ -193,13 +219,13 @@ const PortfolioSection: React.FC<PortfolioSectionProps> = ({
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               className="relative border-t border-white/10 pt-8 pb-10"
-              onMouseEnter={() => !isMobile && setHoveredProject(project.id)}
+              onMouseEnter={() => handleMouseEnter(project.id)}
               onMouseLeave={handleMouseLeave}
               onClick={() => onProjectSelect(project)}
             >
               <div className="group cursor-pointer">
                 <div className="flex justify-between items-center">
-                  <h3 className="text-4xl font-medium group-hover:text-orange-500 transition-colors sm:text-4xl md:text-5xl lg:text-[4rem]">
+                  <h3 className="text-4xl font-medium group-hover:text-orange-500 transition-colors duration-300 ease-out sm:text-4xl md:text-5xl lg:text-[4rem]">
                     <ScrambleWord
                       text={project.title}
                       trigger={hoveredProject === project.id}
@@ -207,7 +233,7 @@ const PortfolioSection: React.FC<PortfolioSectionProps> = ({
                       interval={100}
                     />
                   </h3>
-                  <span className={`text-sm text-white/60 ${isMobile ? 'hidden' : ''}`}>
+                  <span className={`text-sm text-white/60 transition-opacity duration-200 ${isMobile ? 'hidden' : ''}`}>
                     {project.category}
                   </span>
                 </div>
@@ -230,38 +256,63 @@ const PortfolioSection: React.FC<PortfolioSectionProps> = ({
           ))}
         </div>
 
-        {/* Desktop Hover Preview Image */}
+        {/* Desktop Hover Preview Image - Optimized */}
         <AnimatePresence mode="wait">
-          {!isMobile && hoveredProject && imagesPreloaded && (
+          {!isMobile && hoveredProject && imagesPreloaded && currentHoveredProject && (
             <motion.div
               key={hoveredProject}
-              initial={{ opacity: 0, scale: 0.8, x: "-50%", y: "-50%" }}
+              initial={{ 
+                opacity: 0, 
+                scale: 0.9, 
+                x: "-50%", 
+                y: "-50%",
+                rotate: currentHoveredProject.rotation || 0
+              }}
               animate={{
                 opacity: 1,
                 scale: 1,
                 x: "-50%",
                 y: "-50%",
-                rotate: projects.find((p) => p.id === hoveredProject)?.rotation || 0,
+                rotate: currentHoveredProject.rotation || 0,
               }}
-              exit={{ opacity: 0, scale: 0.8, x: "-50%", y: "-50%" }}
+              exit={{ 
+                opacity: 0, 
+                scale: 0.9, 
+                x: "-50%", 
+                y: "-50%",
+                transition: { duration: 0.2, ease: "easeInOut" }
+              }}
               transition={{
-                duration: 0.15,
-                rotate: { type: "spring", stiffness: 200, damping: 30 },
+                type: "spring",
+                stiffness: 300,
+                damping: 35,
+                mass: 0.8,
+                opacity: { duration: 0.25, ease: "easeOut" },
+                scale: { duration: 0.25, ease: "easeOut" }
               }}
-              className="fixed pointer-events-none z-[100] origin-center"
+              className="fixed pointer-events-none z-[100] origin-center will-change-transform"
               style={{
                 top: springY,
                 left: springX,
               }}
             >
-              <motion.div className="w-[480px] h-[340px] overflow-hidden rounded-lg">
+              <motion.div 
+                className="w-[480px] h-[340px] overflow-hidden rounded-lg shadow-2xl"
+                initial={{ rotateY: 10 }}
+                animate={{ rotateY: 0 }}
+                transition={{ duration: 0.3, ease: "easeOut" }}
+              >
                 <motion.img
-                  src={projects.find((p) => p.id === hoveredProject)?.imageUrl}
+                  src={currentHoveredProject.imageUrl}
                   alt="Project Preview"
                   className="w-full h-full object-cover"
-                  initial={{ scale: 1.2 }}
-                  animate={{ scale: 1 }}
-                  transition={{ duration: 0.3 }}
+                  initial={{ scale: 1.1, opacity: 0.8 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  transition={{ 
+                    duration: 0.4, 
+                    ease: "easeOut",
+                    scale: { type: "spring", stiffness: 200, damping: 25 }
+                  }}
                 />
               </motion.div>
             </motion.div>

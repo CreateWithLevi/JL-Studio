@@ -1,19 +1,41 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import Spline from '@splinetool/react-spline';
 import { ScrambleWord } from "../ui/scramble-word";
 
 const Contact = () => {
   const [hoveredElement, setHoveredElement] = useState<string | null>(null);
+  const [shouldLoadSpline, setShouldLoadSpline] = useState(false);
+  const contactRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          setShouldLoadSpline(true);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (contactRef.current) {
+      observer.observe(contactRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <section
+      ref={contactRef}
       id="contact"
       className="relative py-24 bg-black text-white overflow-hidden"
     >
-      {/* Spline 3D Background */}
+      {/* Spline 3D Background - Lazy loaded */}
       <div className="absolute inset-0 w-full h-full">
-        <Spline scene="https://prod.spline.design/jgKqenvzJs5JxeL8/scene.splinecode" />
+        {shouldLoadSpline && (
+          <Spline scene="https://prod.spline.design/jgKqenvzJs5JxeL8/scene.splinecode" />
+        )}
       </div>
 
       {/* Content with higher z-index */}
