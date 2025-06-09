@@ -150,13 +150,13 @@ const defaultProjects: Project[] = [
     id: "9",
     title: "OrbKey",
     category: "Creative Direction, 3D & Motion, Web Design, Web Development",
-    imageUrl: "/images/Portfolio_img/Orbkey.gif",
+    imageUrl: "/images/Portfolio_img/OrbKey.gif",
     description: "Conventional keyboards have seen little change despite technological advancements. OrbKey reimagines typing with a spherical design that enhances comfort, saves space, and introduces a futuristic aesthetic, all while incorporating cutting-edge connectivity and ergonomics.",
     challenge: "Our challenge was to create a compelling digital presence for OrbKey that would effectively communicate its revolutionary design and functionality. The goal was to design an interactive and visually striking website that showcases the spherical keyboard's uniqueness, engages potential users, and builds anticipation for a potential product launch.",
     solution: "We developed a sleek, modern website featuring an interactive 3D model and an immersive typing animation with sound effects. The minimalist design and dynamic color options enhanced user engagement and showcased the futuristic aesthetic of OrbKey.",
     results: "Although the website was not launched publicly due to OrbKey being a conceptual project, it successfully demonstrated the potential of a spherical keyboard. The interactive experience showcased its futuristic design, sparking discussions and inspiring new ideas in keyboard innovation.",
     images: [
-      "/images/Portfolio_img/Orbkey.gif"
+      "/images/Portfolio_img/OrbKey.gif"
     ],
     techStack: ["React", "TypeScript", "TailwindCSS", "Spline"],
     contributors: ["Levi Huang", "Jiu Fang Lin"]
