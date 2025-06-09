@@ -59,13 +59,13 @@ const JiufangPortfolio = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.6 }}
             >
-              {["Figma", "Adobe Creative Suite", "UI/UX Design", "Prototyping", "Branding", "Webflow"].map((skill, index) => (
+              {["UI/UX Design", "Prototyping", "Branding", "Figma", "Spline", "Blender", "Webflow"].map((skill, index) => (
                 <motion.div
                   key={skill}
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.5, delay: 0.8 + index * 0.1 }}
-                  className="px-4 py-2 rounded-full border border-white/20 text-white/60 text-sm hover:border-orange-500 hover:text-orange-500 transition-colors"
+                  className="px-4 py-2 rounded-full border border-white/20 text-white/60 text-sm"
                 >
                   {skill}
                 </motion.div>

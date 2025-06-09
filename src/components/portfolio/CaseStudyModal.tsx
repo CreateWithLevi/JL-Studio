@@ -259,10 +259,13 @@ const CaseStudyModal: React.FC<CaseStudyModalProps> = ({
                       Let's create something amazing for your next project.
                     </p>
                   </div>
-                  <button className="group flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-orange-500 to-red-500 text-white font-medium rounded-full hover:from-orange-600 hover:to-red-600 transition-all duration-300 hover:scale-105">
+                  <a 
+                    href="mailto:jlstudio.xyz@gmail.com"
+                    className="group flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-orange-500 to-red-500 text-white font-medium rounded-full hover:from-orange-600 hover:to-red-600 transition-all duration-300 hover:scale-105"
+                  >
                     Get In Touch
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                  </button>
+                  </a>
                 </div>
               </motion.section>
 
