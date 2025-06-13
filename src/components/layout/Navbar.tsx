@@ -61,15 +61,15 @@ const Navbar = ({
               onClick={() => navigate("/")}
               className="transition-transform duration-200 hover:scale-110"
             >
-              <img
-                src={
-                  theme === "light"
-                    ? "/images/JL_logo_en_b.svg"
-                    : "/images/JL_logo_en_w.svg"
-                }
-                alt="JL Studio"
-                className="h-12 w-12 mt-6"
-              />
+            <img
+              src={
+                theme === "light"
+                  ? "/images/JL_logo_en_b.svg"
+                  : "/images/JL_logo_en_w.svg"
+              }
+              alt="JL Studio"
+              className="h-12 w-12 mt-6"
+            />
             </button>
           </div>
 

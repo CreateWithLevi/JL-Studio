@@ -9,10 +9,14 @@ import PortfolioSection from "./portfolio/PortfolioSection";
 import Contact from "./sections/Contact";
 import Footer from "./sections/Footer";
 import CaseStudyModal from "./portfolio/CaseStudyModal";
+import { getPageConfig } from "./portfolio/ProjectConfig";
 
 const Home = () => {
   const [isEnglish, setIsEnglish] = useState(true);
   const [selectedProject, setSelectedProject] = useState(null);
+  
+  // 獲取 JL Studio 的項目配置
+  const jlStudioConfig = getPageConfig("jl-studio");
 
   return (
     <motion.div
@@ -25,7 +29,11 @@ const Home = () => {
         onLanguageToggle={() => setIsEnglish(!isEnglish)}
       />
       <Hero />
-      <PortfolioSection onProjectSelect={setSelectedProject} />
+      <PortfolioSection 
+        customProjectOrder={jlStudioConfig.projects}
+        categories={jlStudioConfig.categories}
+        onProjectSelect={setSelectedProject} 
+      />
       <Services />
       <Stats />
       <Testimonials />

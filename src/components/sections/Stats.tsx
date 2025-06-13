@@ -32,7 +32,7 @@ const Stats = () => {
       {/* Spline Background - Lazy loaded */}
       <div className="md:absolute inset-0 z-0 md:m-0 h-[400px] sm:h-[450px]  md:h-auto -mt-40 md:-mt-0">
         {shouldLoadSpline && (
-          <Spline scene="https://prod.spline.design/BsD3xGNgNz8ZsYGB/scene.splinecode" />
+        <Spline scene="https://prod.spline.design/BsD3xGNgNz8ZsYGB/scene.splinecode" />
         )}
       </div>
 

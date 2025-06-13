@@ -34,7 +34,7 @@ const Contact = () => {
       {/* Spline 3D Background - Lazy loaded */}
       <div className="absolute inset-0 w-full h-full">
         {shouldLoadSpline && (
-          <Spline scene="https://prod.spline.design/jgKqenvzJs5JxeL8/scene.splinecode" />
+        <Spline scene="https://prod.spline.design/jgKqenvzJs5JxeL8/scene.splinecode" />
         )}
       </div>
 
