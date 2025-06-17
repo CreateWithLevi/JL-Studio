@@ -50,7 +50,7 @@ const LeviPortfolio = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
             >
-              Crafting high-performance, scalable web applications with modern technologies and exceptional user experiences.
+              From SaaS platforms to AI-driven financial tools, I specialize in transforming complex business logic into high-performance, user-centric digital products.
             </motion.p>
 
             <motion.div 
@@ -59,7 +59,7 @@ const LeviPortfolio = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.6 }}
             >
-              {["React", "Next.js", "TypeScript", "Node.js", "Python", "Vue.js"].map((tech, index) => (
+              {["React", "Vue.js", "TypeScript", "Python", "PHP", "GCP", "AI Integration"].map((tech, index) => (
                 <motion.div
                   key={tech}
                   initial={{ opacity: 0, scale: 0.8 }}

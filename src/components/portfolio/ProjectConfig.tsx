@@ -3,64 +3,64 @@ import { Project } from './PortfolioSection';
 // 完整的項目數據庫
 export const allProjects: Project[] = [
   {
-    id: "1",
-    title: "Forexify",
-    category: "Web Design, Web Development",
-    imageUrl: "/images/Portfolio_img/Forexify.jpg",
-    description: "A comprehensive forex trading platform that combines real-time data visualization with advanced trading tools and AI-powered strategy development.",
-    challenge: "Build a high-performance trading platform capable of handling real-time data streams while providing an intuitive interface for complex trading operations and backtesting capabilities.",
-    solution: "Developed a scalable architecture using microservices, implemented WebSocket connections for real-time data, and created a modular UI that allows traders to customize their workspace with advanced charting tools.",
-    results: "The platform now features an innovative AI strategy lab that empowers traders with robust customization and backtesting capabilities. Ultimately, driving smarter decision-making and optimized trading performance with significant user engagement improvements.",
-    images: [
+    "id": "1",
+    "title": "Forexify",
+    "category": "Web Development, AI Integration, Fintech",
+    "imageUrl": "/images/Portfolio_img/Forexify.jpg",
+    "description": "An advanced analytics and strategy development platform for modern foreign exchange traders. It is an integrated decision-support system that unifies data visualization, AI-driven strategy generation, and performance validation to transform complex market data into actionable insights.",
+    "challenge": "The core challenge was to architect a high-performance platform capable of processing real-time data streams while providing an intuitive UI for non-programmers to build and validate complex trading strategies. This required solving for real-time data handling, abstraction of complex logic, and ensuring the reliability of AI-generated code.",
+    "solution": "I implemented a hybrid architecture with a Flask-based web application and a separate serverless data processing pipeline on Google Cloud Run. The technical core is an AI Strategy Lab that uses a 'Template-Grounded Generation' approach with GPT-4o-mini to reliably generate both Python and PineScript code from user inputs. The backtesting engine utilizes the Strategy Pattern to dynamically execute these strategies in a secure environment.",
+    "results": "The AI Strategy Lab dramatically reduced the strategy development lifecycle from days to minutes, improving iteration efficiency by an estimated 90%. This empowered non-technical traders to create and validate their ideas, significantly lowering the barrier to systematic trading and providing powerful, data-driven support for their decisions.",
+    "images": [
       "/images/Portfolio_img/Forexify.jpg"
     ],
-    techStack: ["Vue.js", "Python", "Flask", "AI/ML", "Figma", "Webflow", "Relume"],
-    contributors: ["Levi Huang"]
+    "techStack": ["Vue.js", "Python", "Flask", "OpenAI API", "NumPy", "Web Sockets", "MySQL", "GCP"],
+    "contributors": ["Levi Huang"]
   },
   {
-    id: "2",
-    title: "Templeify",
-    category: "Web Design, Web Development",
-    imageUrl: "/images/Portfolio_img/Templeify.jpg",
-    description: "A spiritual and cultural platform connecting communities with temple services, events, and educational resources through modern digital experiences.",
-    challenge: "Create a respectful and accessible digital platform that honors traditional values while providing modern functionality for temple management and community engagement.",
-    solution: "Designed an intuitive platform featuring event management, donation systems, prayer scheduling, and educational content with culturally appropriate visual design.",
-    results: "Enhanced community engagement by 200% and streamlined temple operations, making spiritual services more accessible to both local and global communities.",
-    images: [
+    "id": "2",
+    "title": "Templeify",
+    "category": "Web Development, E-commerce",
+    "imageUrl": "/images/Portfolio_img/Templeify.jpg",
+    "description": "A custom e-commerce and service booking platform designed to digitally transform the traditional offline services of a religious organization, such as annual blessings and event registrations. The platform makes these services accessible to a broader, global community.",
+    "challenge": "The primary challenge was translating the unique 'family-based' ordering logic into a digital format, which differs significantly from standard e-commerce. It also required integrating a highly reliable payment gateway, ensuring data consistency during asynchronous transactions, and handling seasonal high-concurrency traffic during events like the Lunar New Year.",
+    "solution": "I developed a monolithic application using PHP on Google App Engine. The complex data relationships were managed through a custom-designed relational database schema. A key feature was the asynchronous payment webhook workflow, which validated each transaction with cryptographic signatures to ensure data integrity. To guarantee stability, I implemented performance testing with Locust.py to optimize the system for peak traffic.",
+    "results": "The platform successfully opened a new digital revenue stream for the temple, directly resulting in a 40% increase in annual turnover (from 5M to 7M TWD). By automating data entry and physical outputs (like printing nameplates), it also significantly improved back-office operational efficiency and reduced manual errors.",
+    "images": [
       "/images/Portfolio_img/Templeify.jpg"
     ],
-    techStack: ["JavaScript", "PHP", "Payment Integration", "Figma", "Webflow"],
-    contributors: ["Levi Huang"]
+    "techStack": ["PHP", "JavaScript", "MySQL", "Payment Integration", "GCP", "Locust.py"],
+    "contributors": ["Levi Huang"]
   },
   {
-    id: "3",
-    title: "Apparel X",
-    category: "Web Development",
-    imageUrl: "/images/Portfolio_img/Apparel X.jpg",
-    description: "A cutting-edge fashion e-commerce platform that revolutionizes online shopping through immersive AR try-on experiences and personalized styling recommendations.",
-    challenge: "Create an innovative online fashion platform that bridges the gap between physical and digital shopping experiences while maintaining high performance and user engagement.",
-    solution: "Developed an interactive platform featuring AR virtual try-on technology, AI-powered styling recommendations, and seamless checkout processes with dynamic product visualization.",
-    results: "The platform achieved a 40% increase in conversion rates and 60% reduction in return rates through enhanced user experience and virtual try-on capabilities.",
-    images: [
+    "id": "3",
+    "title": "Apparel X",
+    "category": "Web Development, SaaS, ERP",
+    "imageUrl": "/images/Portfolio_img/Apparel X.jpg",
+    "description": "A multi-tenant SaaS Enterprise Resource Planning (ERP) platform designed specifically for small-to-medium-sized businesses in the apparel industry. It unifies inventory, order, customer, and supplier management into a single, efficient cloud platform.",
+    "challenge": "The main technical challenge was to design a secure, scalable, and cost-effective multi-tenant architecture to serve hundreds of companies, ensuring 100% data isolation. Additional challenges included handling the apparel industry's complex SKU and order logic, and delivering a responsive user experience on a vanilla PHP stack without a modern frontend framework.",
+    "solution": "I architected an innovative SPA-like shell using vanilla JavaScript and jQuery, which dynamically loaded feature pages via AJAX, providing a fluid user experience. Multi-tenancy was achieved through a robust application-layer data isolation model on a shared database, where every SQL query was programmatically filtered by a tenant ID. The entire application was deployed on Google Cloud Platform (GCP) App Engine, leveraging its auto-scaling capabilities.",
+    "results": "The platform successfully supported multiple companies operating securely on a single codebase. The SPA-like architecture provided a near-instantaneous and highly responsive UI, significantly improving user satisfaction. This project demonstrated the ability to build a complex, performant, and maintainable enterprise-grade SaaS application under pragmatic technical constraints.",
+    "images": [
       "/images/Portfolio_img/Apparel X.jpg"
     ],
-    techStack: ["PHP", "jQuery", "GCP"],
-    contributors: ["Levi Huang"]
+    "techStack": ["PHP", "jQuery", "MySQL", "Multi-tenant Architecture", "GCP"],
+    "contributors": ["Levi Huang"]
   },
   {
-    id: "4",
-    title: "We Are Enough",
-    category: "Web Design, Web Development",
-    imageUrl: "/images/Portfolio_img/We Are Enough.jpg",
-    description: "The complete website implementation for the We Are Enough campaign, featuring interactive elements and comprehensive mental wellness resources.",
-    challenge: "Transform the brand identity into a fully functional, accessible website that effectively delivers mental wellness content and community support features.",
-    solution: "Developed a comprehensive website with interactive wellness tools, community forums, resource libraries, and personalized mental health tracking capabilities.",
-    results: "The website facilitated over 50,000 wellness interactions and became a trusted resource for mental health support, significantly expanding the campaign's reach and impact.",
-    images: [
+    "id": "4",
+    "title": "We Are Enough",
+    "category": "Web Design, Web Development, Animation",
+    "imageUrl": "/images/Portfolio_img/We Are Enough.jpg",
+    "description": "An immersive and interactive narrative experience for the 'Education Portal' of a platform connecting impact investors with social enterprises. The goal was to transform complex financial knowledge into an engaging, story-driven digital journey.",
+    "challenge": "The core challenge was to translate a complex, artistic Figma design into a fluid, high-performance, and fully responsive web animation. This required balancing sophisticated visual effects with fast load times and smooth 60fps scrolling, and algorithmically generating complex SVG path animations that adapt to any screen size.",
+    "solution": "I engineered a custom frontend architecture using Vue.js for component structure and the GSAP (GreenSock Animation Platform) library for the animation engine. A key feature was a dynamic SVG path generation algorithm that recalculated on the fly. I used GSAP's ScrollTrigger to create a master animation timeline linked to the user's scroll, and implemented performance optimizations like GPU acceleration and event debouncing. The Laravel backend served content via API in an efficient hybrid rendering strategy.",
+    "results": "The feature became one of the most engaging sections of the platform, with analytics showing a significantly higher average user session duration compared to static pages. It served as a powerful marketing tool to showcase the platform's technical and design innovation, successfully turning educational content into an enjoyable, memorable experience.",
+    "images": [
       "/images/Portfolio_img/We Are Enough.jpg"
     ],
-    techStack: ["Figma", "Vue.js", "Lavarel", "GSAP"],
-    contributors: ["Levi Huang", "Jiu Fang Lin"]
+    "techStack": ["Laravel", "Vue.js", "GSAP", "ScrollTrigger", "Figma"],
+    "contributors": ["Levi Huang", "Jiu Fang Lin"]
   },
   {
     id: "5",
