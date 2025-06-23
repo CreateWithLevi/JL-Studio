@@ -96,13 +96,13 @@ export const allProjects: Project[] = [
     id: "7",
     title: "Zuoluh",
     category: "Creative Direction",
-    imageUrl: "/images/Portfolio_img/Zuoluh.jpg",
+    imageUrl: "/images/Portfolio_img/Zuoluh v2.jpg",
     description: "A creative digital studio platform showcasing innovative design solutions and artistic collaborations with a focus on experimental visual narratives.",
     challenge: "Develop a unique digital presence that reflects the studio's experimental approach while maintaining professional credibility and showcasing diverse creative work.",
     solution: "Built an interactive portfolio platform with experimental layouts, dynamic content presentation, and immersive project showcases that reflect the studio's creative philosophy.",
     results: "The platform increased client inquiries by 300%, won several design awards, and established the studio as a leader in experimental digital design.",
     images: [
-      "/images/Portfolio_img/Zuoluh.jpg"
+      "/images/Portfolio_img/Zuoluh v2.jpg"
     ],
     techStack: ["AutoCAD", "Affinity Designer", "Figma"],
     contributors: ["Jiu Fang Lin"]
