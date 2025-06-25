@@ -18,6 +18,12 @@ interface Project {
   challenge?: string;
   solution?: string;
   results?: string;
+  design_challenge?: string;
+  design_solution?: string;
+  design_results?: string;
+  development_challenge?: string;
+  development_solution?: string;
+  development_results?: string;
   images?: string[];
   techStack?: string[];
   contributors?: string[];
@@ -112,46 +118,125 @@ const CaseStudyModal: React.FC<CaseStudyModalProps> = ({
                 initial={{ y: 50, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.5, duration: 0.6 }}
-                className="grid md:grid-cols-3 gap-8"
               >
-                {/* Challenge */}
-                <div className="space-y-4 p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm">
-                  <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-full bg-red-500/20 flex items-center justify-center">
-                      <div className="w-3 h-3 rounded-full bg-red-500"></div>
+                {project.design_challenge ? (
+                  <div className="space-y-12">
+                    {/* Design Phase */}
+                    <div>
+                      <h2 className="text-2xl md:text-3xl font-bold text-white flex items-center gap-3 mb-6">
+                        <div className="w-2 h-8 bg-purple-500 rounded-full"></div>
+                        Design Phase
+                      </h2>
+                      <div className="grid md:grid-cols-3 gap-8">
+                        <div className="space-y-4 p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm">
+                          <div className="flex items-center gap-3">
+                            <div className="w-8 h-8 rounded-full bg-red-500/20 flex items-center justify-center">
+                              <div className="w-3 h-3 rounded-full bg-red-500"></div>
+                            </div>
+                            <h3 className="text-xl font-semibold text-white">The Challenge</h3>
+                          </div>
+                          <p className="text-white/70 leading-relaxed">{project.design_challenge}</p>
+                        </div>
+                        <div className="space-y-4 p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm">
+                          <div className="flex items-center gap-3">
+                            <div className="w-8 h-8 rounded-full bg-blue-500/20 flex items-center justify-center">
+                              <div className="w-3 h-3 rounded-full bg-blue-500"></div>
+                            </div>
+                            <h3 className="text-xl font-semibold text-white">The Solution</h3>
+                          </div>
+                          <p className="text-white/70 leading-relaxed">{project.design_solution}</p>
+                        </div>
+                        <div className="space-y-4 p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm">
+                          <div className="flex items-center gap-3">
+                            <div className="w-8 h-8 rounded-full bg-green-500/20 flex items-center justify-center">
+                              <div className="w-3 h-3 rounded-full bg-green-500"></div>
+                            </div>
+                            <h3 className="text-xl font-semibold text-white">The Results</h3>
+                          </div>
+                          <p className="text-white/70 leading-relaxed">{project.design_results}</p>
+                        </div>
+                      </div>
                     </div>
-                    <h3 className="text-xl font-semibold text-white">The Challenge</h3>
-                  </div>
-                  <p className="text-white/70 leading-relaxed">
-                    {project.challenge}
-                  </p>
-                </div>
 
-                {/* Solution */}
-                <div className="space-y-4 p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm">
-                  <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-full bg-blue-500/20 flex items-center justify-center">
-                      <div className="w-3 h-3 rounded-full bg-blue-500"></div>
+                    {/* Development Phase */}
+                    <div>
+                      <h2 className="text-2xl md:text-3xl font-bold text-white flex items-center gap-3 mb-6">
+                        <div className="w-2 h-8 bg-teal-500 rounded-full"></div>
+                        Development Phase
+                      </h2>
+                      <div className="grid md:grid-cols-3 gap-8">
+                        <div className="space-y-4 p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm">
+                          <div className="flex items-center gap-3">
+                            <div className="w-8 h-8 rounded-full bg-red-500/20 flex items-center justify-center">
+                              <div className="w-3 h-3 rounded-full bg-red-500"></div>
+                            </div>
+                            <h3 className="text-xl font-semibold text-white">The Challenge</h3>
+                          </div>
+                          <p className="text-white/70 leading-relaxed">{project.development_challenge}</p>
+                        </div>
+                        <div className="space-y-4 p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm">
+                          <div className="flex items-center gap-3">
+                            <div className="w-8 h-8 rounded-full bg-blue-500/20 flex items-center justify-center">
+                              <div className="w-3 h-3 rounded-full bg-blue-500"></div>
+                            </div>
+                            <h3 className="text-xl font-semibold text-white">The Solution</h3>
+                          </div>
+                          <p className="text-white/70 leading-relaxed">{project.development_solution}</p>
+                        </div>
+                        <div className="space-y-4 p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm">
+                          <div className="flex items-center gap-3">
+                            <div className="w-8 h-8 rounded-full bg-green-500/20 flex items-center justify-center">
+                              <div className="w-3 h-3 rounded-full bg-green-500"></div>
+                            </div>
+                            <h3 className="text-xl font-semibold text-white">The Results</h3>
+                          </div>
+                          <p className="text-white/70 leading-relaxed">{project.development_results}</p>
+                        </div>
+                      </div>
                     </div>
-                    <h3 className="text-xl font-semibold text-white">The Solution</h3>
                   </div>
-                  <p className="text-white/70 leading-relaxed">
-                    {project.solution}
-                  </p>
-                </div>
+                ) : (
+                  <div className="grid md:grid-cols-3 gap-8">
+                    {/* Challenge */}
+                    <div className="space-y-4 p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm">
+                      <div className="flex items-center gap-3">
+                        <div className="w-8 h-8 rounded-full bg-red-500/20 flex items-center justify-center">
+                          <div className="w-3 h-3 rounded-full bg-red-500"></div>
+                        </div>
+                        <h3 className="text-xl font-semibold text-white">The Challenge</h3>
+                      </div>
+                      <p className="text-white/70 leading-relaxed">
+                        {project.challenge}
+                      </p>
+                    </div>
 
-                {/* Results */}
-                <div className="space-y-4 p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm">
-                  <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-full bg-green-500/20 flex items-center justify-center">
-                      <div className="w-3 h-3 rounded-full bg-green-500"></div>
+                    {/* Solution */}
+                    <div className="space-y-4 p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm">
+                      <div className="flex items-center gap-3">
+                        <div className="w-8 h-8 rounded-full bg-blue-500/20 flex items-center justify-center">
+                          <div className="w-3 h-3 rounded-full bg-blue-500"></div>
+                        </div>
+                        <h3 className="text-xl font-semibold text-white">The Solution</h3>
+                      </div>
+                      <p className="text-white/70 leading-relaxed">
+                        {project.solution}
+                      </p>
                     </div>
-                    <h3 className="text-xl font-semibold text-white">The Results</h3>
+
+                    {/* Results */}
+                    <div className="space-y-4 p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm">
+                      <div className="flex items-center gap-3">
+                        <div className="w-8 h-8 rounded-full bg-green-500/20 flex items-center justify-center">
+                          <div className="w-3 h-3 rounded-full bg-green-500"></div>
+                        </div>
+                        <h3 className="text-xl font-semibold text-white">The Results</h3>
+                      </div>
+                      <p className="text-white/70 leading-relaxed">
+                        {project.results}
+                      </p>
+                    </div>
                   </div>
-                  <p className="text-white/70 leading-relaxed">
-                    {project.results}
-                  </p>
-                </div>
+                )}
               </motion.section>
 
               {/* Tech stack */}

@@ -14,6 +14,12 @@ export interface Project {
   challenge?: string;
   solution?: string;
   results?: string;
+  design_challenge?: string;
+  design_solution?: string;
+  design_results?: string;
+  development_challenge?: string;
+  development_solution?: string;
+  development_results?: string;
   images?: string[];
   techStack?: string[];
   contributors?: string[]; // 參與人列表
