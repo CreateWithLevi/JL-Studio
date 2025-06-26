@@ -47,12 +47,6 @@ const Navbar = ({
             >
               Service
             </button>
-            <button
-              onClick={() => scrollToSection("stats")}
-              className="text-sm text-white/60 hover:text-white transition-colors"
-            >
-              About
-            </button>
           </div>
 
           {/* Center - Logo */}

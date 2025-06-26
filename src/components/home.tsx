@@ -35,8 +35,6 @@ const Home = () => {
         onProjectSelect={setSelectedProject} 
       />
       <Services />
-      <Stats />
-      <Testimonials />
       <Contact />
       <Footer />
 
