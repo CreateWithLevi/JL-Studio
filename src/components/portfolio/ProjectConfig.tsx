@@ -14,7 +14,7 @@ export const allProjects: Project[] = [
     "images": [
       "/images/Portfolio_img/Forexify.jpg"
     ],
-    "techStack": ["Vue.js", "Python", "Flask", "OpenAI API", "NumPy", "Web Sockets", "MySQL", "GCP"],
+    "techStack": ["Vue.js", "Python", "Flask", "OpenAI API", "NumPy", "MySQL", "GCP"],
     "contributors": ["Levi Huang"]
   },
   {
