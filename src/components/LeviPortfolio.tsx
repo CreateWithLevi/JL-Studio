@@ -5,6 +5,7 @@ import PortfolioSection from "./portfolio/PortfolioSection";
 import Contact from "./sections/Contact";
 import Footer from "./sections/Footer";
 import CaseStudyModal from "./portfolio/CaseStudyModal";
+import DynamicHeroBackground from "./ui/DynamicHeroBackground";
 
 const LeviPortfolio = () => {
   const [isEnglish, setIsEnglish] = useState(true);
@@ -22,10 +23,12 @@ const LeviPortfolio = () => {
       <Navbar
         isEnglish={isEnglish}
         onLanguageToggle={() => setIsEnglish(!isEnglish)}
+        hideService
       />
       
       {/* Hero section for Levi portfolio */}
-      <section className="relative w-full h-screen bg-black text-white flex flex-col justify-center">
+      <section className="relative w-full h-screen bg-black text-white flex flex-col justify-center overflow-hidden">
+        <DynamicHeroBackground />
         <div className="container mx-auto px-12 z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -90,7 +93,7 @@ const LeviPortfolio = () => {
         </div>
 
         {/* Animated background elements */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {/* <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <motion.div
             animate={{ rotate: 360 }}
             transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
@@ -101,7 +104,7 @@ const LeviPortfolio = () => {
             transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
             className="absolute bottom-20 left-20 w-24 h-24 border border-orange-500/20 rounded-full"
           />
-        </div>
+        </div> */}
       </section>
 
       <PortfolioSection 
@@ -109,7 +112,7 @@ const LeviPortfolio = () => {
         categories={devCategories}
         filterByContributor="Levi Huang"
       />
-      <Contact />
+      <Contact hideService />
       <Footer />
 
       {selectedProject && (

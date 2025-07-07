@@ -2,18 +2,23 @@ import { useTheme } from "../ThemeProvider";
 import { Button } from "../ui/button";
 import { Moon, Sun } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 interface NavbarProps {
   isEnglish?: boolean;
   onLanguageToggle?: () => void;
+  hideService?: boolean;
 }
 
 const Navbar = ({
   isEnglish = true,
   onLanguageToggle = () => { },
+  hideService,
 }: NavbarProps) => {
   const { theme, setTheme } = useTheme();
   const navigate = useNavigate();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("home");
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
@@ -41,12 +46,14 @@ const Navbar = ({
             >
               Work
             </button>
-            <button
-              onClick={() => scrollToSection("services")}
-              className="text-sm text-white/60 hover:text-white transition-colors"
-            >
-              Service
-            </button>
+            {!hideService && (
+              <button
+                onClick={() => scrollToSection("services")}
+                className="text-sm text-white/60 hover:text-white transition-colors"
+              >
+                Service
+              </button>
+            )}
           </div>
 
           {/* Center - Logo */}

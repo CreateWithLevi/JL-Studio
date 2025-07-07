@@ -5,6 +5,7 @@ import PortfolioSection from "./portfolio/PortfolioSection";
 import Contact from "./sections/Contact";
 import Footer from "./sections/Footer";
 import CaseStudyModal from "./portfolio/CaseStudyModal";
+import DynamicHeroBackground from "./ui/DynamicHeroBackground";
 
 const JiufangPortfolio = () => {
   const [isEnglish, setIsEnglish] = useState(true);
@@ -22,10 +23,12 @@ const JiufangPortfolio = () => {
       <Navbar
         isEnglish={isEnglish}
         onLanguageToggle={() => setIsEnglish(!isEnglish)}
+        hideService
       />
       
       {/* Hero section for Jiufang portfolio */}
-      <section className="relative w-full h-screen bg-black text-white flex flex-col justify-center">
+      <section className="relative w-full h-screen bg-black text-white flex flex-col justify-center overflow-hidden">
+        <DynamicHeroBackground />
         <div className="container mx-auto px-12 z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -90,7 +93,7 @@ const JiufangPortfolio = () => {
         </div>
 
         {/* Animated background elements */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {/* <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <motion.div
             animate={{ rotate: 360 }}
             transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
@@ -106,7 +109,7 @@ const JiufangPortfolio = () => {
             transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
             className="absolute top-1/2 right-1/4 w-16 h-16 border border-white/5 rounded-full"
           />
-        </div>
+        </div> */}
       </section>
 
       <PortfolioSection 
@@ -114,7 +117,7 @@ const JiufangPortfolio = () => {
         categories={designCategories}
         filterByContributor="Jiu Fang Lin"
       />
-      <Contact />
+      <Contact hideService />
       <Footer />
 
       {selectedProject && (

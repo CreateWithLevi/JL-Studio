@@ -2,8 +2,13 @@ import React, { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import Spline from '@splinetool/react-spline';
 import { ScrambleWord } from "../ui/scramble-word";
+import { Button } from "../ui/button";
 
-const Contact = () => {
+interface ContactProps {
+  hideService?: boolean;
+}
+
+const Contact: React.FC<ContactProps> = ({ hideService }) => {
   const [hoveredElement, setHoveredElement] = useState<string | null>(null);
   const [shouldLoadSpline, setShouldLoadSpline] = useState(false);
   const contactRef = useRef<HTMLElement>(null);
@@ -77,7 +82,7 @@ const Contact = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
             viewport={{ once: true }}
-            className="text-[2rem] font-medium flex items-center gap-2 md:gap-8 mb-32 sm:text-4xl md:text-5xl lg:text-[5rem]"
+            className="text-[2rem] font-medium flex items-center gap-0 md:gap-0 mb-32 sm:text-4xl md:text-5xl lg:text-[5rem]"
           >
             <button
               onClick={() => document.getElementById("portfolio")?.scrollIntoView({ behavior: "smooth" })}
@@ -85,24 +90,18 @@ const Contact = () => {
               onMouseLeave={() => setHoveredElement(null)}
               className="hover:text-[#F97315] transition-colors"
             >
-              <ScrambleWord text="Work" trigger={hoveredElement === 'work'} className="inline-block" /><span>,</span>
+              <ScrambleWord text="Work" trigger={hoveredElement === 'work'} className="inline-block" />
             </button>
-            <button
-              onClick={() => document.getElementById("services")?.scrollIntoView({ behavior: "smooth" })}
-              onMouseEnter={() => setHoveredElement('service')}
-              onMouseLeave={() => setHoveredElement(null)}
-              className="hover:text-[#F97315] transition-colors"
-            >
-              <ScrambleWord text="Service" trigger={hoveredElement === 'service'} className="inline-block" /><span>,</span>
-            </button>
-            <button
-              onClick={() => document.getElementById("stats")?.scrollIntoView({ behavior: "smooth" })}
-              onMouseEnter={() => setHoveredElement('about')}
-              onMouseLeave={() => setHoveredElement(null)}
-              className="hover:text-[#F97315] transition-colors"
-            >
-              <ScrambleWord text="About" trigger={hoveredElement === 'about'} className="inline-block" />
-            </button>
+            {!hideService && (
+              <button
+                onClick={() => document.getElementById("services")?.scrollIntoView({ behavior: "smooth" })}
+                onMouseEnter={() => setHoveredElement('service')}
+                onMouseLeave={() => setHoveredElement(null)}
+                className="hover:text-[#F97315] transition-colors"
+              >
+                <span>, </span><ScrambleWord text="Service" trigger={hoveredElement === 'service'} className="inline-block" />
+              </button>
+            )}
           </motion.div>
         </div>
       </div>
