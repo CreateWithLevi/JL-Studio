@@ -36,6 +36,7 @@ const ProjectCard = ({
           <img
             src={imageUrl}
             alt={title}
+            loading="lazy"
             className="object-cover w-full h-full transition-transform duration-300 hover:scale-105"
           />
         </AspectRatio>

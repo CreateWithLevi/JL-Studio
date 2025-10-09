@@ -201,33 +201,11 @@ const PortfolioSection: React.FC<PortfolioSectionProps> = ({
     };
   }, []); // Empty dependency array since we only want this to run once
 
-  // Separate useEffect for image preloading
+  // Remove preloading - use lazy loading instead for better performance
   useEffect(() => {
-    const preloadImages = async () => {
-      if (projects.length === 0) return;
-      
-      const imagePromises = projects.map((project) => {
-        return new Promise<void>((resolve, reject) => {
-          const img = new Image();
-          img.onload = () => resolve();
-          img.onerror = () => reject();
-          img.src = project.imageUrl;
-        });
-      });
-
-      try {
-        await Promise.all(imagePromises);
-        setImagesPreloaded(true);
-      } catch (error) {
-        console.error("Error preloading images:", error);
-        // Set as preloaded even if some images fail to prevent infinite loading
-        setImagesPreloaded(true);
-      }
-    };
-
-    setImagesPreloaded(false); // Reset when projects change
-    preloadImages();
-  }, [projects]); // Only depend on projects
+    // Images will load on-demand with lazy loading
+    setImagesPreloaded(true);
+  }, [projects]);
 
   // Update projects when category or base projects change
   useEffect(() => {
@@ -319,6 +297,7 @@ const PortfolioSection: React.FC<PortfolioSectionProps> = ({
                     <img
                       src={project.imageUrl}
                       alt={project.title}
+                      loading="lazy"
                       className="w-full h-full object-cover"
                     />
                   </motion.div>
@@ -347,6 +326,7 @@ const PortfolioSection: React.FC<PortfolioSectionProps> = ({
                         variants={imageVariants}
                         src={project.imageUrl}
                         alt={project.title}
+                        loading="lazy"
                       />
                     </motion.div>
                   </motion.div>
