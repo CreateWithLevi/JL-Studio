@@ -1,30 +1,49 @@
-# React + TypeScript + Vite
+# JL Studio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A creative digital studio portfolio showcasing web development, 3D motion design, and brand identity work.
 
-Currently, two official plugins are available:
+**Live Site:** [jlstudio.xyz](https://jlstudio.xyz)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Tech Stack
 
-## Expanding the ESLint configuration
+- **Framework:** React 18 + TypeScript
+- **Build Tool:** Vite
+- **Styling:** TailwindCSS
+- **Animation:** Framer Motion
+- **3D:** Spline
+- **UI Components:** Radix UI + shadcn/ui
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Getting Started
 
-- Configure the top-level `parserOptions` property like this:
+```bash
+# Install dependencies
+npm install
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+# Start development server
+npm run dev
+
+# Build for production
+npm run build
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## Project Structure
+
+```
+src/
+├── components/
+│   ├── layout/        # Navbar, Footer
+│   ├── portfolio/     # Project cards, Case study modal
+│   ├── sections/      # Hero, Services, Contact
+│   └── ui/            # Reusable UI components
+├── pages/             # Route pages
+└── styles/            # Global styles
+```
+
+## Team
+
+- **Levi Huang** - Full-Stack Developer
+- **Jiu Fang Lin** - Creative Director & Designer
+
+## License
+
+© 2025 JL Studio. All rights reserved.
