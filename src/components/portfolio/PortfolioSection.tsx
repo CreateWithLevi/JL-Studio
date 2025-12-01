@@ -23,6 +23,7 @@ export interface Project {
   images?: string[];
   techStack?: string[];
   contributors?: string[]; // 參與人列表
+  projectUrl?: string; // 專案連結
 }
 
 interface PortfolioSectionProps {

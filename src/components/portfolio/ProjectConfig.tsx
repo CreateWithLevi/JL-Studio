@@ -15,7 +15,8 @@ export const allProjects: Project[] = [
       "/images/Portfolio_img/Forexify.jpg"
     ],
     "techStack": ["Vue.js", "Python", "Flask", "OpenAI API", "NumPy", "MySQL", "GCP"],
-    "contributors": ["Levi Huang"]
+    "contributors": ["Levi Huang"],
+    "projectUrl": "https://forexify.cc/"
   },
   {
     "id": "2",
@@ -30,7 +31,8 @@ export const allProjects: Project[] = [
       "/images/Portfolio_img/Templeify.jpg"
     ],
     "techStack": ["PHP", "JavaScript", "MySQL", "Payment Integration", "GCP", "Locust.py"],
-    "contributors": ["Levi Huang"]
+    "contributors": ["Levi Huang"],
+    "projectUrl": "https://yonglien.templeify.com/"
   },
   {
     "id": "3",
@@ -45,7 +47,8 @@ export const allProjects: Project[] = [
       "/images/Portfolio_img/Apparel X.jpg"
     ],
     "techStack": ["PHP", "jQuery", "MySQL", "Multi-tenant Architecture", "GCP"],
-    "contributors": ["Levi Huang"]
+    "contributors": ["Levi Huang"],
+    "projectUrl": "https://ax-tw.com"
   },
   {
     "id": "4",
@@ -63,7 +66,8 @@ export const allProjects: Project[] = [
       "/images/Portfolio_img/We Are Enough.jpg"
     ],
     "techStack": ["Laravel", "Vue.js", "GSAP", "ScrollTrigger", "Figma"],
-    "contributors": ["Levi Huang", "Jiu Fang Lin"]
+    "contributors": ["Levi Huang", "Jiu Fang Lin"],
+    "projectUrl": "https://www.weareenough.biz/education-portal"
   },
   {
     id: "5",
@@ -78,7 +82,8 @@ export const allProjects: Project[] = [
       "/images/Portfolio_img/The Longreach Group.jpg"
     ],
     techStack: ["Webflow", "Finsweet CMS", "Custom Code"],
-    contributors: ["Levi Huang"]
+    contributors: ["Levi Huang"],
+    projectUrl: "https://www.longreachgroup.com"
   },
   {
     id: "6",
@@ -93,7 +98,8 @@ export const allProjects: Project[] = [
       "/images/Portfolio_img/Chillr.gif"
     ],
     techStack: ["Spline", "React", "Framer Motion"],
-    contributors: ["Jiu Fang Lin", "Levi Huang"]
+    contributors: ["Jiu Fang Lin", "Levi Huang"],
+    projectUrl: "https://chillr.jlstudio.xyz"
   },
   {
     id: "7",
@@ -108,7 +114,8 @@ export const allProjects: Project[] = [
       "/images/Portfolio_img/Zuoluh v2.jpg"
     ],
     techStack: ["AutoCAD", "Affinity Designer", "Figma"],
-    contributors: ["Jiu Fang Lin"]
+    contributors: ["Jiu Fang Lin"],
+    projectUrl: "https://zuoluh.com/"
   },
   {
     id: "8",
@@ -123,7 +130,8 @@ export const allProjects: Project[] = [
       "/images/Portfolio_img/Bucket Protocol.jpg"
     ],
     techStack: ["Spline", "3D Animation"],
-    contributors: ["Jiu Fang Lin"]
+    contributors: ["Jiu Fang Lin"],
+    projectUrl: "https://www.bucketprotocol.io/"
   },
   {
     id: "9",
@@ -138,7 +146,8 @@ export const allProjects: Project[] = [
       "/images/Portfolio_img/OrbKey.gif"
     ],
     techStack: ["React", "TypeScript", "TailwindCSS", "Spline"],
-    contributors: ["Levi Huang", "Jiu Fang Lin"]
+    contributors: ["Levi Huang", "Jiu Fang Lin"],
+    projectUrl: "https://orbkey.jlstudio.xyz"
   },
   {
     id: "10",
@@ -168,7 +177,8 @@ export const allProjects: Project[] = [
       "/images/Portfolio_img/Yeh Family Philanthropy.jpg"
     ],
     techStack: ["Adobe XD"],
-    contributors: ["Levi Huang"]
+    contributors: ["Levi Huang"],
+    projectUrl: "https://www.yehfp.com/"
   },
   {
     id: "12",
@@ -183,7 +193,40 @@ export const allProjects: Project[] = [
       "/images/Portfolio_img/We Are Enough - Logo.jpg"
     ],
     techStack: ["AutoCAD", "Affinity Designer", "Figma"],
-    contributors: ["Jiu Fang Lin"]
+    contributors: ["Jiu Fang Lin"],
+    projectUrl: "https://www.weareenough.biz/education-portal"
+  },
+  {
+    id: "13",
+    title: "Zuoluh App",
+    category: "Web Development, AI Integration, Fintech",
+    imageUrl: "/images/Portfolio_img/Zuoluh v2.jpg",
+    description: "Zuoluh is an intelligent fintech platform designed to help users understand how their daily spending behavior aligns with their personal values. By integrating with bank accounts via the Plaid API and leveraging a Retrieval-Augmented Generation (RAG) system powered by AI, the platform provides deeply personalized, context-aware insights about spending patterns and the values alignment of merchants.",
+    challenge: "The primary architectural challenge was building a secure, scalable platform that translates subjective user 'values' into quantifiable insights using AI-powered contextual intelligence. This required complex third-party integrations (Plaid, Google Gemini), personalized subjective logic mapping, maintaining an ESG knowledge base queryable through semantic search, strict data security protocols, and comprehensive AI observability.",
+    solution: "I designed an API-first, RAG-enhanced, service-oriented architecture with a phased rollout strategy starting with a PWA. The hybrid data architecture combines PostgreSQL for relational data with ChromaDB for vector-based semantic search over ESG reports. The custom RAG system features tool-calling architecture with Merchant Values Search and Values Alignment tools, powered by Google Gemini Flash 2.0 with LangFuse for LLM observability and cost tracking.",
+    results: "The architectural design establishes a solid foundation for empowering users with unprecedented clarity on spending-values alignment. The platform is designed with a long-term B2B strategy for anonymized market trend reports and value-aligned merchant partnerships. This project demonstrates the ability to architect a complex digital product from concept to execution, aligning technical strategy with product roadmap and business model.",
+    images: [
+      "/images/Portfolio_img/Zuoluh v2.jpg"
+    ],
+    techStack: ["React", "Next.js", "Node.js", "PostgreSQL", "ChromaDB", "Google Gemini", "Plaid API", "LangFuse", "Redis"],
+    contributors: ["Levi Huang"],
+    projectUrl: "https://zuoluh.vercel.app/"
+  },
+  {
+    id: "14",
+    title: "Jiu Fang Portfolio",
+    category: "Web Development, Web Design, Animation",
+    imageUrl: "/images/Portfolio_img/Jiu Portfolio.jpg",
+    description: "A dynamic, one-page portfolio website built with Astro, Svelte, and WebGL, featuring interactive effects and smooth animations. The site showcases creative work through content collections with sophisticated visual interactions including text scramble effects, WebGL fluid shader distortion, and SVG morph animations.",
+    challenge: "Creating a portfolio that stands out in a crowded creative space required balancing visual sophistication with performance. The challenge was to implement multiple interactive effects—text scramble on navigation, WebGL fluid distortion on images, and SVG morphing on links—while maintaining fast load times and smooth 60fps animations across all devices and browsers.",
+    solution: "Built on Astro 5 for static site generation with selective client-side interactivity through Svelte 5 components. Implemented a lightweight WebGL layer using OGL for fluid shader effects, GSAP for professional-grade animations, and custom TypeScript utilities for text scramble effects. The content collections system enables easy project updates while the hybrid rendering approach ensures optimal performance.",
+    results: "The portfolio delivers a memorable, immersive experience that effectively showcases creative work while demonstrating technical excellence. The combination of static generation and selective interactivity achieves near-instant page loads with engaging visual effects. The modular architecture supports easy content updates and maintains consistent performance across desktop and mobile browsers with WebGL 1.0+ support.",
+    images: [
+      "/images/Portfolio_img/Jiu Portfolio.jpg"
+    ],
+    techStack: ["Astro", "Svelte", "TypeScript", "OGL", "GSAP", "WebGL"],
+    contributors: ["Jiu Fang Lin", "Levi Huang"],
+    projectUrl: "https://jiu.jlstudio.xyz"
   }
 ];
 
@@ -191,8 +234,10 @@ export const allProjects: Project[] = [
 export const jlStudioProjectIds: string[] = [
   "4", // We Are Enough - 合作項目
   "6", // Chillr - 合作項目，展示創意
+  "14", // Jiu Fang Portfolio - 合作項目
   "1", // Forexify - 技術實力
   "7", // Zuoluh - 創意方向
+  "13", // Zuoluh App - 技術開發
   "8", // Bucket Protocol - 3D 動畫
   "2", // Templeify - 全端開發
   "9", // OrbKey - 合作項目，展示工作室實力
@@ -206,10 +251,12 @@ export const jlStudioProjectIds: string[] = [
 // Levi Huang 頁面項目列表 (重點展示開發與技術項目)
 export const leviHuangProjectIds: string[] = [
   "1", // Forexify - 主要技術項目
+  "13", // Zuoluh App - AI/Fintech 開發
   "3", // Apparel X - 全端開發
   "2", // Templeify - 全端開發
   "5", // The Longreach Group - 開發專案
   "4", // We Are Enough - 合作開發
+  "14", // Jiu Fang Portfolio - 合作開發
   "9", // OrbKey - 合作開發項目
   "6", // Chillr - 合作開發
   "10", // PureSalary - 設計項目
@@ -218,6 +265,7 @@ export const leviHuangProjectIds: string[] = [
 
 // Jiu Fang Lin 頁面項目列表 (重點展示設計與創意項目)
 export const jiuFangLinProjectIds: string[] = [
+  "14", // Jiu Fang Portfolio - 個人作品集
   "7", // Zuoluh - 主要創意項目
   "8", // Bucket Protocol - 3D 動畫
   "12", // We Are Enough - Logo - 品牌設計

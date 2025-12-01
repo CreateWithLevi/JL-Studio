@@ -6,6 +6,7 @@ import Contact from "./sections/Contact";
 import Footer from "./sections/Footer";
 import CaseStudyModal from "./portfolio/CaseStudyModal";
 import DynamicHeroBackground from "./ui/DynamicHeroBackground";
+import { getProjectsByIds, leviHuangProjectIds } from "./portfolio/ProjectConfig";
 
 const LeviPortfolio = () => {
   const [isEnglish, setIsEnglish] = useState(true);
@@ -107,10 +108,10 @@ const LeviPortfolio = () => {
         </div> */}
       </section>
 
-      <PortfolioSection 
+      <PortfolioSection
         onProjectSelect={setSelectedProject}
         categories={devCategories}
-        filterByContributor="Levi Huang"
+        customProjectOrder={getProjectsByIds(leviHuangProjectIds)}
       />
       <Contact hideService />
       <Footer />

@@ -27,6 +27,7 @@ interface Project {
   images?: string[];
   techStack?: string[];
   contributors?: string[];
+  projectUrl?: string;
 }
 
 interface CaseStudyModalProps {
@@ -78,16 +79,29 @@ const CaseStudyModal: React.FC<CaseStudyModalProps> = ({
                 <h1 className="text-4xl md:text-6xl font-bold text-white mb-4 leading-tight">
                   {project.title}
                 </h1>
-                <div className="flex flex-wrap gap-2">
-                  {project.category.split(", ").map((cat, index) => (
-                    <Badge
-                      key={index}
-                      variant="secondary"
-                      className="bg-white/20 text-white border-white/30 backdrop-blur-md"
+                <div className="flex flex-wrap items-center gap-3">
+                  <div className="flex flex-wrap gap-2">
+                    {project.category.split(", ").map((cat, index) => (
+                      <Badge
+                        key={index}
+                        variant="secondary"
+                        className="bg-white/20 text-white border-white/30 backdrop-blur-md"
+                      >
+                        {cat}
+                      </Badge>
+                    ))}
+                  </div>
+                  {project.projectUrl && (
+                    <a
+                      href={project.projectUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 px-4 py-2 bg-white/20 hover:bg-white/30 backdrop-blur-md rounded-full text-white text-sm font-medium transition-colors"
                     >
-                      {cat}
-                    </Badge>
-                  ))}
+                      <ExternalLink className="w-4 h-4" />
+                      View Project
+                    </a>
+                  )}
                 </div>
               </motion.div>
             </div>
