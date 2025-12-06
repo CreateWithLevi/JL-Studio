@@ -26,7 +26,7 @@ const LeviPortfolio = () => {
         onLanguageToggle={() => setIsEnglish(!isEnglish)}
         hideService
       />
-      
+
       {/* Hero section for Levi portfolio */}
       <section className="relative w-full h-screen bg-black text-white flex flex-col justify-center overflow-hidden">
         <DynamicHeroBackground />
@@ -37,7 +37,7 @@ const LeviPortfolio = () => {
             transition={{ duration: 0.8 }}
             className="max-w-4xl"
           >
-            <motion.h1 
+            <motion.h1
               className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 leading-tight"
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
@@ -45,25 +45,25 @@ const LeviPortfolio = () => {
             >
               <span className="text-orange-500">Levi Huang</span>
               <br />
-              Full-Stack Developer
+              Product Engineer
             </motion.h1>
-            
-            <motion.p 
+
+            <motion.p
               className="text-xl md:text-2xl text-white/80 mb-8 max-w-2xl leading-relaxed"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
             >
-              I build digital products that drive results—from architecting complex SaaS platforms with code to crafting high-performance websites using modern no-code tools.
+              8+ years building scalable web applications from concept to launch. I specialize in 0-to-1 product delivery, AI/LLM integration, and end-to-end ownership across fintech, e-commerce, and enterprise SaaS.
             </motion.p>
 
-            <motion.div 
+            <motion.div
               className="flex flex-wrap gap-4"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.6 }}
             >
-              {["React", "Vue.js", "TypeScript", "Python", "GCP", "Webflow", "AI Integration"].map((tech, index) => (
+              {["TypeScript", "React", "Next.js", "Vue.js", "Python", "AI/LLM", "GCP"].map((tech, index) => (
                 <motion.div
                   key={tech}
                   initial={{ opacity: 0, scale: 0.8 }}
